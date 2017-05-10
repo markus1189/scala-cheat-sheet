@@ -1,4 +1,8 @@
+* data types
 * lazy val / val / var
+* mutable / immutable collections
+  - scala.collection.immutable.
+  - scala.collection.mutable
 * Option
   - getOrElse
   - orElse
@@ -46,6 +50,17 @@
  - sealed trait + final case classes
 
 * precedence
+* REPL
+  - :t[ype]
+  - :he[lp]
+  - :h? <string>
+  - :imports
+  - :implicits
+  - :load <path>
+  - :paste
+  - :quit
+  - :reset
+  - :kind
 * JSON?
 * case classes
   - toString
@@ -53,6 +68,7 @@
   - apply
   - serializable
   - no case-2-case inheritance
+  - every param is a val field
 * Upper bounds / lower bounds / ...
   - upper: A <: B
   - lower: A >: B
@@ -80,6 +96,9 @@
 * map / flatMap / (with)Filter, the holy trinity
 * for expression / for loop
 * imports:
+  - import foo.x
+  - import foo.{x,y}
+  - import foo.x, bar.y
   - import foo._
   - import foo.{Int => FooInt}
   - def foo(x: Class) = { import x._ }
@@ -91,7 +110,6 @@
 
 * anyval
   - rules for allocation?
-* the magic colon in the name of defs
 * usage of underscores
 * "sealed" modifier
 * constructors via this
@@ -103,3 +121,20 @@
 * implicit evidence:
   - <:<
   - =:=
+* objects
+  - singletons
+  - companions
+* type hierarchy
+  - Any / AnyRef / AnyVal
+  - Nothing
+* operators and precedence
+  - (==) is not as in java reference equality!
+  - the name is important
+  - the magic colon in the name of defs
+  - unary operators
+* control structures
+  - while (...) { ... }
+  - do { ... } while(...)
+  - try / catch / finally
+* varargs
+* type alias / type members
