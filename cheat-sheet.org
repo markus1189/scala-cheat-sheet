@@ -1,0 +1,105 @@
+* lazy val / val / var
+* Option
+  - getOrElse
+  - orElse
+  - Option(null) // None
+  - Some(null)   // Some(null)
+  - None
+  - Option.empty[Int]
+
+* Either
+  - since 2.12: right biased, swap
+  - fold/getOrElse/
+  - toOption/toTry
+
+* Try (scala.util)
+  - fold
+  - getOrElse
+  - orElse
+  - recover
+  - transform
+
+* Collections methods:
+  - collect/collectFirst/find
+  - forall/exists
+  - map/flatMap/filter
+  - head/headOption
+
+* Futures
+  - Duration: 2.seconds (import scala.concurrent.durations._)
+  - Await.result(future, 42.seconds) // Only once in main, avoid!
+  -
+
+* Ranges
+  - 1 to 10
+  - 1 until 10
+  - 1.to(10, 2)
+
+* Comments
+  - // and /* */ and /** */
+
+* Pattern Matching
+ - list of patterns
+ - examples?
+
+* ADTs
+ - sealed trait + final case classes
+
+* precedence
+* JSON?
+* case classes
+  - toString
+  - unapply
+  - apply
+  - serializable
+  - no case-2-case inheritance
+* Upper bounds / lower bounds / ...
+  - upper: A <: B
+  - lower: A >: B
+  - careful: lhs introduces a NEW one
+
+* context bounds
+  - mostly used for type classes
+  - equivalent to implicit parameter list
+
+* implicits
+  - rules for search
+  - implicit val / def / class
+  - implicitly[A]
+
+* String fun:
+  - multiline with/out margin
+  - raw
+  - substitute
+  - custom?
+
+* Regex:
+  - "foo".r
+  - matching of groups
+
+* map / flatMap / (with)Filter, the holy trinity
+* for expression / for loop
+* imports:
+  - import foo._
+  - import foo.{Int => FooInt}
+  - def foo(x: Class) = { import x._ }
+  - wildcard, renaming, everywhere
+
+* typeclasses?
+* package clauses
+  - chained?
+
+* anyval
+  - rules for allocation?
+* the magic colon in the name of defs
+* usage of underscores
+* "sealed" modifier
+* constructors via this
+* qualifiers for private, e.g. private[this]
+* sbt:
+  - simple build?
+  - compile / test / test:compile / ~test / etc
+
+* implicit evidence:
+  - <:<
+  - =:=
