@@ -1,0 +1,164 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx}
+\usepackage{hyperref}
+
+\pdfinfo{
+  /Title (scala-cheat-sheet)
+  /Creator (codecentric)
+  /Producer (pdfTeX 1.40.0)
+  /Author (codecentric)
+  /Subject (Scala)
+  /Keywords (scala,cheat-sheet)}
+
+\ifthenelse{\lengthtest{\paperwidth=11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth=297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+\pagestyle{empty}
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright{}
+\footnotesize
+\begin{multicols}{3}
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{codecentric's Scala Cheat Sheet}} \\
+\end{center}
+
+\section{Collections}
+\subsection{Option}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Either}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+\subsection{Try}
+\begin{itemize}
+\item getOrElse
+\item fold
+\item ...
+\end{itemize}
+
+\section{Futures}
+
+\subsection{Timeouts}
+\begin{itemize}
+\item import scala.concurrent.duration.\_
+\item Await.result(future, 42.seconds)
+\end{itemize}
+
+\section{Implicits}
+\begin{itemize}
+\item implicit conversions
+\item implicit arguments
+\end{itemize}
+
+\section{Type Parameters}
+
+
+\section{Type Hierarchy}
+Text 2
+
+\section{IntelliJ}
+Etc.
+
+% You can even have references
+\rule{0.3\linewidth}{0.25pt}
+\scriptsize
+\end{multicols}
+\end{document}
