@@ -10,6 +10,8 @@
 \usepackage[top=0mm,bottom=1mm,left=0mm,right=1mm]{geometry}
 \usepackage[framemethod=tikz]{mdframed}
 \usepackage{microtype}
+\usepackage{minted}
+
 
 \let\bar\overline
 
@@ -41,9 +43,7 @@ leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 \newcommand{\header}{
 \begin{mdframed}[style=header]
 \footnotesize
-\sffamily
-Scala Cheat Sheet\\
-by~codecentric
+The codecentric Scala Cheat Sheet
 \end{mdframed}
 }
 
@@ -176,9 +176,20 @@ by~codecentric
 
 \begin{document}
 \small
-\begin{multicols*}{5}
+\begin{multicols*}{4}
+  \section{Variables}
+  \begin{minted}{scala}
+var x = "mutable"
+val y = "immutable"
+// val but initialization on first access
+lazy val z = "lazy"
+  \end{minted}
 \section{Collections}
 \subsection{Option}
+\begin{minted}{scala}
+opt.getOrElse(42)
+opt.fold(42)(_.toString)
+\end{minted}
 \begin{itemize}
 \item getOrElse
 \item fold
@@ -249,7 +260,10 @@ by~codecentric
 
 \subsection{Timeouts}
 \begin{itemize}
-\item import scala.concurrent.duration.\_
+\item
+  \begin{minted}{scala}
+    import scala.concurrent.duration._
+  \end{minted}
 \item Await.result(future, 42.seconds)
 \end{itemize}
 
