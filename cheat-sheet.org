@@ -142,3 +142,7 @@
   - try / catch / finally
 * varargs
 * type alias / type members
+* IntelliJ shortcuts
+  - show implicit parameters
+  - show implicit conversions
+  - ...
