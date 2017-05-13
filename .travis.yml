@@ -3,3 +3,15 @@ language:
 
 script:
   - nix-shell --pure --command "latexmk -shell-escape -pdf scala-cheat-sheet.tex"
+  - convert scala-cheat-sheet.pdf scala-cheat-sheet.png
+
+after_success:
+  - git config --global user.email "travis-ci@travis.org"
+  - git config --global user.name "Travis CI"
+  - git remote rm origin
+  - git remote add origin https://markus1189:$GITHUB_API_KEY@github.com/markus1189/scala-cheat-sheet.git
+  - git checkout -b pdf
+  - git add -f scala-cheat-sheet.pdf
+  - git add -f scala-cheat-sheet.png
+  - git commit -m "$(date --iso-8601) @ $(git rev-list --max-count=1 --abbrev-commit $TRAVIS_BRANCH)" -m "[skip ci]"
+  - git push -f origin pdf
