@@ -8,15 +8,16 @@ let
     beamer
     chngcntr
     cleveref
-    exercise
     enumitem
     etoolbox
     excludeonly
+    exercise
     fancyvrb
     float
     framed
     graphviz
     ifplatform
+    keystroke
     kpfonts
     lineno
     listings
@@ -33,6 +34,7 @@ let
     scheme-medium
     soul
     sourcesanspro
+    titlesec
     todonotes
     upquote
     xcolor

@@ -2,20 +2,32 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{tikz}
-\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard,trees}
 \usepackage[nosf]{kpfonts}
-\usepackage[t1]{sourcesanspro}
 \usepackage{multicol}
 \usepackage{wrapfig}
 \usepackage[top=0mm,bottom=1mm,left=0mm,right=1mm]{geometry}
 \usepackage[framemethod=tikz]{mdframed}
 \usepackage{microtype}
 \usepackage{minted}
+\usepackage{titlesec}
+\usepackage{keystroke}
 
+\definecolor{mygreen}{HTML}{4F8D4F}
+\definecolor{myblue}{HTML}{3C6A6A}
+\definecolor{myyellow}{HTML}{B18663}
+\definecolor{myred}{HTML}{B16363}
+\definecolor{sectionbg}{HTML}{D5D5D5}
+
+\tikzstyle{every node}=[font=\footnotesize\sffamily]
+\tikzstyle{sup}=[rectangle,draw,fill=myblue!50,rounded corners=.8ex]
+\tikzstyle{sub}=[rectangle,draw,fill=mygreen!70,rounded corners=.8ex]
+\tikzstyle{block} = [rectangle, draw, text width=2.5cm, text centered, rounded corners, minimum height=4em,fill=blue!20]
+\tikzstyle{line} = [draw,thick, -latex']
+\tikzstyle{cloud} = [draw, ellipse, text width=2.5cm, text centered]
+\tikzstyle{edge from parent}=[<-,thick,draw]
 
 \let\bar\overline
-
-\definecolor{myblue}{cmyk}{1,.72,0,.38}
 
 \def\firstcircle{(0,0) circle (1.5cm)}
 \def\secondcircle{(0:2cm) circle (1.5cm)}
@@ -48,16 +60,10 @@ The codecentric Scala Cheat Sheet
 }
 
 \makeatletter
-\renewcommand{\section}{\@startsection{section}{1}{0mm}%
-                                {.2ex}%
-                                {.2ex}%x
-                                {\color{myblue}\sffamily\small\bfseries}}
-\renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
-                                {.2ex}%
-                                {.2ex}%x
-                                {\sffamily\bfseries}}
 
-
+\newcommand{\colorsection}[1]{\colorbox{sectionbg}{\parbox{\textwidth-215\fboxsep}{\centering#1}}}
+\titleformat{\section}[block]{\color{myblue}\sffamily\small\bfseries\filcenter}{}{1em}{\colorsection}
+\titleformat{\subsection}[block]{\color{myblue}\sffamily\small\bfseries\filcenter}{}{1em}{}
 
 \def\multi@column@out{%
    \ifnum\outputpenalty <-\@M
@@ -175,44 +181,110 @@ The codecentric Scala Cheat Sheet
 \setlength{\parindent}{0pt}
 
 \begin{document}
+\setminted{style=colorful}
+
 \small
 \begin{multicols*}{4}
   \section{Variables}
   \begin{minted}{scala}
-var x = "mutable"
-val y = "immutable"
-// val but initialization on first access
+var x      = "mutable"
+val y      = "immutable"
 lazy val z = "lazy"
-  \end{minted}
-\section{Collections}
-\subsection{Option}
-\begin{minted}{scala}
-opt.getOrElse(42)
-opt.fold(42)(_.toString)
 \end{minted}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
-\subsection{Either}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
-\subsection{Either}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
-\subsection{Either}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
+
+\section{Methods}
+\begin{minted}{scala}
+def id(arg: Char): Char = arg
+def add(x: Int, y: Int): Int = x+y
+def add(x: Int)(y: Int): Int = x+y
+def twice[A](f: => A) = { f; f }
+\end{minted}
+
+\section{Function Types}
+\begin{center}
+\begin{minipage}{0.25\linewidth}
+\begin{minted}{scala}
+   () => A
+ Unit => A
+    A => B
+(A,B) => C
+\end{minted}
+\end{minipage}
+\begin{minipage}{0.25\linewidth}
+  \begin{minted}{text}
+    ===
+    ===
+    ===
+    ===
+  \end{minted}
+\end{minipage}
+\begin{minipage}{0.4\linewidth}
+\begin{minted}{scala}
+Function0[A]
+Function1[Unit,A]
+Function1[A,B]
+Function2[A,B,C]
+\end{minted}
+\end{minipage}
+\end{center}
+\section{Types}
+\begin{center}
+\begin{tikzpicture}[auto,grow=right]
+\tikzstyle{level 1}=[sibling distance=16em,level distance=3em]
+\tikzstyle{level 2}=[sibling distance=4em,level distance=6em]
+% Place nodes
+\node [sup] (any) {Any}
+child{node [sup] (anyval) {AnyVal}
+    child{node [sub] (nums) {Numbers}}
+    child{node [sub] (char) {Char}}
+    child{node [sub,fill=myred!60] (char) {Your AnyVal}}
+    child{node [sub] (bool) {Boolean}}
+}
+child{node [sup] (anyref) {AnyRef}
+    child{node [sub] (colls) {Collections}}
+    child{node [sub,fill=myred!60] (clss) {Your Class}}
+    child{node [sub] (str) {String}}
+};
+\node[sup,xshift=1cm,right of=clss](null){Null};
+\node[sup,xshift=4.5cm,right of=any](nothing){Nothing};
+%% Draw edges
+\path [line] (null) -- (str);
+\path [line] (null) -- (colls);
+\path [line] (null) -- (clss);
+\path [line] (nothing) -- (null);
+\path [line] (nothing) -- (bool);
+\path [line] (nothing) -- (char);
+\path [line] (nothing) -- (nums);
+\end{tikzpicture}
+\end{center}
+\section{Collections}
+\begin{center}
+  \begin{tikzpicture}[
+    level 1/.style={sibling distance=10em}]
+    \node[sup]{Option[+A]}
+    child{node[sub] {None[Nothing]}}
+    child{node[sub]{Some[+A](value: A)}}
+    ;
+  \end{tikzpicture}
+\end{center}
+\begin{center}
+  \begin{tikzpicture}[
+    level 1/.style={sibling distance=10em}]
+    \node[sup]{Either[+A,+B]}
+    child{node[sub] {Left[+A](value: A)}}
+    child{node[sub]{Right[+B](value: B)}}
+    ;
+  \end{tikzpicture}
+\end{center}
+\begin{center}
+  \begin{tikzpicture}[
+    level 1/.style={sibling distance=12em}]
+    \node[sup]{Try[+A]}
+    child{node[sub] {Failure[+A](e: Throwable)}}
+    child{node[sub]{Success[+A](value: A)}}
+    ;
+  \end{tikzpicture}
+\end{center}
 \subsection{Either}
 \begin{itemize}
 \item getOrElse
@@ -280,7 +352,12 @@ opt.fold(42)(_.toString)
 Text 2
 
 \section{IntelliJ}
-Etc.
+\begin{tabular}{l l}
+  Reformat & \Ctrl+\Alt+\keystroke{L} \\
+  Extract Method & \Ctrl+\Alt+\keystroke{M} \\
+  Rename & \Shift+\keystroke{F6} \\
+  Expand selection & \Ctrl+\keystroke{W}
+\end{tabular}
 
 \end{multicols*}
 \end{document}
