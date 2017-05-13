@@ -1,0 +1,5 @@
+language:
+  - nix
+
+script:
+  - nix-shell --pure --command "latexmk -shell-escape -pdf scala-cheat-sheet.tex"
