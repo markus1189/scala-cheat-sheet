@@ -1,5 +1,5 @@
 # The codecentric Scala Cheat Sheet
-![travis](https://travis-ci.org/markus1189/scala-cheat-sheet.svg?branch=master)
+[![Build Status](https://travis-ci.org/markus1189/scala-cheat-sheet.svg)](https://travis-ci.org/markus1189/scala-cheat-sheet)
 
 Download: https://github.com/markus1189/scala-cheat-sheet/raw/pdf/scala-cheat-sheet.pdf
 
