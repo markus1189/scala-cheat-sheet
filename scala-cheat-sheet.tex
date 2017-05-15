@@ -202,32 +202,32 @@ val (one,two) = ("one", '2')
 
 \section{Methods}
 \begin{minted}{scala}
-def id(arg: Char): Char = arg
+def id(c: Char): Char = c
 
-def add(x: Int, y: Int): Int = x+y
+def add(n: Int, m: Int): Int = n + m
 
 // Curried version (one argument per list)
-def add(x: Int)(y: Int): Int = x+y
+def add(n: Int)(m: Int): Int = n + m
 
-// By-name parameters, evaluates `f` twice
-def twice(f: => Unit) = { f; f }
+// By-name parameters, evaluates `a` twice
+def twice[A](a: => A) = { a; a }
 
 // Repeated Parameters (Varargs)
-def many(args: String*): Seq[String] = args
+def many(cs: Char*): Seq[Char] = cs
 
 // Calling a varargs method with a `Seq`
-scala> many(Seq("1", "2") :_*)
+scala> many(Seq('1', '2') :_*)
 \end{minted}
 
 \section{Function Types}
 \begin{center}
 \begin{minipage}{0.37\linewidth}
 \begin{minted}{scala}
-   ()    => A
- Unit    => A
-    A    => B
-(A,B)    => C
-(A,..,V) => W
+   ()      => A
+ Unit      => A
+    A      => B
+(A, B)     => C
+(A, .., V) => W
 \end{minted}
 \end{minipage}
 \begin{minipage}{0.09\linewidth}
@@ -242,10 +242,10 @@ scala> many(Seq("1", "2") :_*)
 \begin{minipage}{0.50\linewidth}
 \begin{minted}{scala}
 Function0[A]
-Function1[Unit,A]
-Function1[A,B]
-Function2[A,B,C]
-Function22[A,..,V,W]
+Function1[Unit, A]
+Function1[A, B]
+Function2[A, B, C]
+Function22[A, .., V, W]
 \end{minted}
 \end{minipage}
 \end{center}
@@ -285,27 +285,27 @@ child{node [sup] (anyref) {AnyRef}
 \begin{center}
   \begin{tikzpicture}[
     level 1/.style={sibling distance=10em}]
-    \node[sup]{Option[+A]}
+    \node[sup]{Option[A]}
     child{node[sub] {None[Nothing]}}
-    child{node[sub]{Some[+A](value: A)}}
+    child{node[sub]{Some[A](value: A)}}
     ;
   \end{tikzpicture}
 \end{center}
 \begin{center}
   \begin{tikzpicture}[
     level 1/.style={sibling distance=10em}]
-    \node[sup]{Either[+A,+B]}
-    child{node[sub] {Left[+A](value: A)}}
-    child{node[sub]{Right[+B](value: B)}}
+    \node[sup]{Either[A, B]}
+    child{node[sub] {Left[A](value: A)}}
+    child{node[sub]{Right[B](value: B)}}
     ;
   \end{tikzpicture}
 \end{center}
 \begin{center}
   \begin{tikzpicture}[
     level 1/.style={sibling distance=12em}]
-    \node[sup]{Try[+A]}
-    child{node[sub] {Failure[+A](e: Throwable)}}
-    child{node[sub]{Success[+A](value: A)}}
+    \node[sup]{Try[A]}
+    child{node[sub] {Failure[A](e: Throwable)}}
+    child{node[sub]{Success[A](value: A)}}
     ;
   \end{tikzpicture}
 \end{center}
