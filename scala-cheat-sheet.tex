@@ -198,20 +198,19 @@ lazy val z = "lazy"
 
 \section{Methods}
 \begin{minted}{scala}
-def id(arg: Char): Char = arg
-def add(x: Int, y: Int): Int = x+y
-def add(x: Int)(y: Int): Int = x+y
-def twice[A](f: => A) = { f; f }
+def id(c: Char): Char = c
+def add(n: Int, m: Int): Int = n + m
+def add(n: Int)(m: Int): Int = n + m
+def twice[A](a: => A): A = { a; a }
 \end{minted}
 
 \section{Function Types}
 \begin{center}
 \begin{minipage}{0.25\linewidth}
 \begin{minted}{scala}
-   () => A
- Unit => A
-    A => B
-(A,B) => C
+    () => A
+     A => B
+(A, B) => C
 \end{minted}
 \end{minipage}
 \begin{minipage}{0.25\linewidth}
@@ -225,9 +224,8 @@ def twice[A](f: => A) = { f; f }
 \begin{minipage}{0.4\linewidth}
 \begin{minted}{scala}
 Function0[A]
-Function1[Unit,A]
-Function1[A,B]
-Function2[A,B,C]
+Function1[A, B]
+Function2[A, B, C]
 \end{minted}
 \end{minipage}
 \end{center}
@@ -245,7 +243,7 @@ child{node [sup] (anyval) {AnyVal}
     child{node [sub] (bool) {Boolean}}
 }
 child{node [sup] (anyref) {AnyRef}
-    child{node [sub] (colls) {Collections}}
+    chiFld{node [sub] (colls) {Collections}}
     child{node [sub,fill=myred!60] (clss) {Your Class}}
     child{node [sub] (str) {String}}
 };
@@ -265,27 +263,27 @@ child{node [sup] (anyref) {AnyRef}
 \begin{center}
   \begin{tikzpicture}[
     level 1/.style={sibling distance=10em}]
-    \node[sup]{Option[+A]}
+    \node[sup]{Option[A]}
     child{node[sub] {None[Nothing]}}
-    child{node[sub]{Some[+A](value: A)}}
+    child{node[sub]{Some[A](value: A)}}
     ;
   \end{tikzpicture}
 \end{center}
 \begin{center}
   \begin{tikzpicture}[
     level 1/.style={sibling distance=10em}]
-    \node[sup]{Either[+A,+B]}
-    child{node[sub] {Left[+A](value: A)}}
-    child{node[sub]{Right[+B](value: B)}}
+    \node[sup]{Either[A, B]}
+    child{node[sub] {Left[A](value: A)}}
+    child{node[sub]{Right[B](value: B)}}
     ;
   \end{tikzpicture}
 \end{center}
 \begin{center}
   \begin{tikzpicture}[
     level 1/.style={sibling distance=12em}]
-    \node[sup]{Try[+A]}
-    child{node[sub] {Failure[+A](e: Throwable)}}
-    child{node[sub]{Success[+A](value: A)}}
+    \node[sup]{Try[A]}
+    child{node[sub] {Failure[A](e: Throwable)}}
+    child{node[sub]{Success[A](value: A)}}
     ;
   \end{tikzpicture}
 \end{center}
