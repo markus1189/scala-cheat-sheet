@@ -1,148 +1,149 @@
-* data types
-* lazy val / val / var
-* mutable / immutable collections
-  - scala.collection.immutable.
-  - scala.collection.mutable
-* Option
-  - getOrElse
-  - orElse
-  - Option(null) // None
-  - Some(null)   // Some(null)
-  - None
-  - Option.empty[Int]
+* Cheat Sheet
+** TODO data types
+** TODO lazy val / val / var
+** TODO mutable / immutable collections
+   - scala.collection.immutable.
+   - scala.collection.mutable
+** TODO Option
+   - getOrElse
+   - orElse
+   - Option(null) // None
+   - Some(null)   // Some(null)
+   - None
+   - Option.empty[Int]
 
-* Either
-  - since 2.12: right biased, swap
-  - fold/getOrElse/
-  - toOption/toTry
+** TODO Either
+   - since 2.12: right biased, swap
+   - fold/getOrElse/
+   - toOption/toTry
 
-* Try (scala.util)
-  - fold
-  - getOrElse
-  - orElse
-  - recover
-  - transform
+** TODO Try (scala.util)
+   - fold
+   - getOrElse
+   - orElse
+   - recover
+   - transform
 
-* Collections methods:
-  - collect/collectFirst/find
-  - forall/exists
-  - map/flatMap/filter
-  - head/headOption
+** TODO Collections methods:
+   - collect/collectFirst/find
+   - forall/exists
+   - map/flatMap/filter
+   - head/headOption
 
-* Futures
-  - Duration: 2.seconds (import scala.concurrent.durations._)
-  - Await.result(future, 42.seconds) // Only once in main, avoid!
-  -
+** TODO Futures
+   - Duration: 2.seconds (import scala.concurrent.durations._)
+   - Await.result(future, 42.seconds) // Only once in main, avoid!
+   -
 
-* Ranges
-  - 1 to 10
-  - 1 until 10
-  - 1.to(10, 2)
+** TODO Ranges
+   - 1 to 10
+   - 1 until 10
+   - 1.to(10, 2)
 
-* Comments
-  - // and /* */ and /** */
+** TODO Comments
+   - // and /* */ and /** */
 
-* Pattern Matching
- - list of patterns
- - examples?
+** TODO Pattern Matching
+  - list of patterns
+  - examples?
 
-* ADTs
- - sealed trait + final case classes
+** TODO ADTs
+  - sealed trait + final case classes
 
-* REPL
-  - :t[ype]
-  - :he[lp]
-  - :h? <string>
-  - :imports
-  - :implicits
-  - :load <path>
-  - :paste
-  - :quit
-  - :reset
-  - :kind
-* JSON?
-* case classes
-  - toString
-  - unapply
-  - apply
-  - serializable
-  - every param is a val field
-* Upper bounds / lower bounds / ...
-  - upper: A <: B
-  - lower: A >: B
-  - careful: lhs introduces a NEW one
+** TODO REPL
+   - :t[ype]
+   - :he[lp]
+   - :h? <string>
+   - :imports
+   - :implicits
+   - :load <path>
+   - :paste
+   - :quit
+   - :reset
+   - :kind
+** TODO JSON?
+** TODO case classes
+   - toString
+   - unapply
+   - apply
+   - serializable
+   - every param is a val field
+** TODO Upper bounds / lower bounds / ...
+   - upper: A <: B
+   - lower: A >: B
+   - careful: lhs introduces a NEW one
 
-* context bounds
-  - mostly used for type classes
-  - equivalent to implicit parameter list
+** TODO context bounds
+   - mostly used for type classes
+   - equivalent to implicit parameter list
 
-* implicits
-  - rules for search
-  - implicit val / def / class
-  - implicitly[A]
+** TODO implicits
+   - rules for search
+   - implicit val / def / class
+   - implicitly[A]
 
-* String fun:
-  - multiline with/out margin
-  - raw
-  - substitute
-  - custom?
+** TODO String fun:
+   - multiline with/out margin
+   - raw
+   - substitute
+   - custom?
 
-* Regex:
-  - "foo".r
-  - matching of groups
+** TODO Regex:
+   - "foo".r
+   - matching of groups
 
-* map / flatMap / (with)Filter, the holy trinity
-* for expression / for loop
-* imports:
-  - import foo.x
-  - import foo.{x,y}
-  - import foo.x, bar.y
-  - import foo._
-  - import foo.{Int => FooInt}
-  - def foo(x: Class) = { import x._ }
-  - wildcard, renaming, everywhere
+** TODO map / flatMap / (with)Filter, the holy trinity
+** TODO for expression / for loop
+** TODO imports:
+   - import foo.x
+   - import foo.{x,y}
+   - import foo.x, bar.y
+   - import foo._
+   - import foo.{Int => FooInt}
+   - def foo(x: Class) = { import x._ }
+   - wildcard, renaming, everywhere
 
-* typeclasses?
-* package clauses
-  - almost as in java
-  - ... but chainable
+** TODO typeclasses?
+** TODO package clauses
+   - almost as in java
+   - ... but chainable
 
-* anyval
-  - single val and `extends AnyVal`
-  - rules for allocation?
-* usage of underscores
-* "sealed" modifier
-* constructors via this
-* access
-  - private
-  - private[this]
-  - private[<package>]
-  - ... and friends
-* sbt:
-  - simple build?
-  - compile / test / test:compile / ~test / etc
+** TODO anyval
+   - single val and `extends AnyVal`
+   - rules for allocation?
+** TODO usage of underscores
+** TODO "sealed" modifier
+** TODO constructors via this
+** TODO access
+   - private
+   - private[this]
+   - private[<package>]
+   - ... and friends
+** TODO sbt:
+   - simple build?
+   - compile / test / test:compile / ~test / etc
 
-* implicit evidence:
-  - <:<
-  - =:=
-* objects
-  - singletons, lazy init
-  - companions
-* type hierarchy
-  - Any / AnyRef / AnyVal
-  - Nothing
-* operators and precedence
-  - (==) is not as in java reference equality!
-  - the name is important
-  - the magic colon in the name of defs
-  - unary operators
-* control structures
-  - while (...) { ... }
-  - do { ... } while(...)
-  - try / catch / finally
-* varargs
-* type alias / type members
-* IntelliJ shortcuts
-  - show implicit parameters
-  - show implicit conversions
-  - ...
+** TODO implicit evidence:
+   - <:<
+   - =:=
+** TODO objects
+   - singletons, lazy init
+   - companions
+** TODO type hierarchy
+   - Any / AnyRef / AnyVal
+   - Nothing
+** TODO operators and precedence
+   - (==) is not as in java reference equality!
+   - the name is important
+   - the magic colon in the name of defs
+   - unary operators
+** TODO control structures
+   - while (...) { ... }
+   - do { ... } while(...)
+   - try / catch / finally
+** TODO varargs
+** TODO type alias / type members
+** TODO IntelliJ shortcuts
+   - show implicit parameters
+   - show implicit conversions
+   - ...
