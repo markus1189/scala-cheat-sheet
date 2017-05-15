@@ -253,6 +253,7 @@ child{node [sup] (anyref) {AnyRef}
 };
 \node[sup,xshift=1cm,right of=clss](null){Null};
 \node[sup,xshift=4.5cm,right of=any](nothing){Nothing};
+\node[sup,above of=anyref](obj){Object};
 %% Draw edges
 \path [line] (null) -- (str);
 \path [line] (null) -- (colls);
@@ -261,9 +262,10 @@ child{node [sup] (anyref) {AnyRef}
 \path [line] (nothing) -- (bool);
 \path [line] (nothing) -- (char);
 \path [line] (nothing) -- (nums);
+\path [line,dashed] (obj) -- (anyref);
 \end{tikzpicture}
 \end{center}
-\section{Collections}
+\section{Option, Either, Try}
 \begin{center}
   \begin{tikzpicture}[
     level 1/.style={sibling distance=10em}]
