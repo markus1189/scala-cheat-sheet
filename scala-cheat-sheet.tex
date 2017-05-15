@@ -333,18 +333,19 @@ child{node [sup] (anyref) {AnyRef}
 \item \textit{precedence} is determined by the \textit{first} character of the
   operator's name:
 
-\begin{minted}{scala}
-(lowest)   letters
-    v      |
-    v      ^
-    v      &
-    v      = !
-    v      < >
-    v      :
-    v      + -
-    v      * / %
-(highest)  other special characters
-\end{minted}
+  \begin{tabular}{l | l}
+    lowest & letters \\
+           & \mintinline{scala}/|/ \\
+           & \mintinline{scala}|^| \\
+           & \mintinline{scala}|&| \\
+           & \mintinline{scala}|= !| \\
+           & \mintinline{scala}|< >| \\
+           & \mintinline{scala}|:| \\
+           & \mintinline{scala}|+ -| \\
+           & \mintinline{scala}|* / %| \\
+    highest & other special characters
+
+  \end{tabular}
 \item \textit{associativity} is determined by the \textit{last}
   character of the operator's name.  If the last character is a
   \mintinline{scala}|:| it is right-associative, otherwise it is
