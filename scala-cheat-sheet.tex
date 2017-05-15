@@ -366,6 +366,45 @@ child{node [sup] (anyref) {AnyRef}
 
 \end{minted}
 
+\section{Imports}
+
+\begin{minted}{scala}
+// Regular import
+import scala.util.Try
+
+// Import multiple
+import scala.util.{Success, Failure}
+
+// Import wildcard
+import scala.util._
+
+// Import under different name
+import java.time.{Clock => JClock}
+
+// Import everything except
+import scala.util.{Try => _, _}
+
+// Multiple import clauses
+import scala.util.Try, scala.util.Success
+\end{minted}
+
+\section{Modifiers}
+\begin{minted}{scala}
+private
+private[this]
+private[<package>]
+
+protected
+protected[this]
+
+override
+abstract override
+abstract
+final
+sealed
+lazy
+\end{minted}
+
 \section{Futures}
 
 \subsection{Timeouts}
