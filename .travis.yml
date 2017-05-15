@@ -3,7 +3,8 @@ language:
 
 script:
   - nix-shell --pure --command "latexmk -shell-escape -pdf scala-cheat-sheet.tex"
-  - convert scala-cheat-sheet.pdf scala-cheat-sheet.png
+  - convert -density 300 scala-cheat-sheet.pdf scala-cheat-sheet.png
+  - convert scala-cheat-sheet*.png -append scala-cheat-sheet.png
 
 after_success:
   - git config --global user.email "travis-ci@travis.org"
