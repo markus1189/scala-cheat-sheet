@@ -1,4 +1,5 @@
 \documentclass[10pt,landscape,a4paper]{article}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{tikz}
@@ -12,6 +13,8 @@
 \usepackage{minted}
 \usepackage{titlesec}
 \usepackage{keystroke}
+
+\DeclareUnicodeCharacter{2261}{\^=}
 
 \definecolor{mygreen}{HTML}{4F8D4F}
 \definecolor{myblue}{HTML}{3C6A6A}
@@ -53,14 +56,10 @@ leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 }
 
 \newcommand{\header}{
-  \begin{mdframed}[style=header]
-    \begin{center}
-      \sffamily\centering
-      Scala Cheat Sheet \\
-      \vspace*{1mm}
-      \includegraphics[height=7mm]{codecentric.png}
-    \end{center}
-  \end{mdframed}
+  \vspace{1mm}
+  \begin{center}
+    \includegraphics[height=09mm]{codecentric.png}
+  \end{center}
 }
 
 \makeatletter
@@ -206,28 +205,31 @@ def twice[A](f: => A) = { f; f }
 
 \section{Function Types}
 \begin{center}
-\begin{minipage}{0.25\linewidth}
+\begin{minipage}{0.37\linewidth}
 \begin{minted}{scala}
-   () => A
- Unit => A
-    A => B
-(A,B) => C
+   ()    => A
+ Unit    => A
+    A    => B
+(A,B)    => C
+(A,..,V) => W
 \end{minted}
 \end{minipage}
-\begin{minipage}{0.25\linewidth}
+\begin{minipage}{0.09\linewidth}
   \begin{minted}{text}
-    ===
-    ===
-    ===
-    ===
+==
+==
+==
+==
+==
   \end{minted}
 \end{minipage}
-\begin{minipage}{0.4\linewidth}
+\begin{minipage}{0.50\linewidth}
 \begin{minted}{scala}
 Function0[A]
 Function1[Unit,A]
 Function1[A,B]
 Function2[A,B,C]
+Function22[A,..,V,W]
 \end{minted}
 \end{minipage}
 \end{center}
