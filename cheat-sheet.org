@@ -1,6 +1,7 @@
 * Cheat Sheet
 ** TODO data types
-** TODO lazy val / val / var
+** DONE lazy val / val / var
+   CLOSED: [2017-05-15 Mon 20:32]
 ** TODO mutable / immutable collections
    - scala.collection.immutable.
    - scala.collection.mutable
@@ -35,7 +36,8 @@
    - Await.result(future, 42.seconds) // Only once in main, avoid!
    -
 
-** TODO Ranges
+** DONE Ranges
+   CLOSED: [2017-05-15 Mon 20:37]
    - 1 to 10
    - 1 until 10
    - 1.to(10, 2)
@@ -147,3 +149,4 @@
    - show implicit parameters
    - show implicit conversions
    - ...
+** TODO collection performance overview?

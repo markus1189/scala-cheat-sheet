@@ -7,14 +7,14 @@
 \usepackage[nosf]{kpfonts}
 \usepackage{multicol}
 \usepackage{wrapfig}
-\usepackage[top=0mm,bottom=1mm,left=0mm,right=1mm]{geometry}
+\usepackage[top=2mm,bottom=13mm,left=2mm,right=2mm]{geometry}
 \usepackage[framemethod=tikz]{mdframed}
 \usepackage{microtype}
 \usepackage{minted}
 \usepackage{titlesec}
 \usepackage{keystroke}
 
-\DeclareUnicodeCharacter{2261}{\^=}
+\renewcommand\familydefault{\sfdefault}
 
 \definecolor{mygreen}{HTML}{4F8D4F}
 \definecolor{myblue}{HTML}{3C6A6A}
@@ -190,17 +190,33 @@ leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 \begin{multicols*}{4}
   \section{Variables}
   \begin{minted}{scala}
-var x      = "mutable"
-val y      = "immutable"
-lazy val z = "lazy"
+var x         = "mutable"
+val y         = "immutable"
+
+// Initialized once on first access
+lazy val z    = "lazy"
+
+// Pattern matching on left side
+val (one,two) = ("one", '2')
 \end{minted}
 
 \section{Methods}
 \begin{minted}{scala}
 def id(arg: Char): Char = arg
+
 def add(x: Int, y: Int): Int = x+y
+
+// Curried version (one argument per list)
 def add(x: Int)(y: Int): Int = x+y
-def twice[A](f: => A) = { f; f }
+
+// By-name parameters, evaluates `f` twice
+def twice(f: => Unit) = { f; f }
+
+// Repeated Parameters (Varargs)
+def many(args: String*): Seq[String] = args
+
+// Calling a varargs method with a `Seq`
+scala> many(Seq("1", "2") :_*)
 \end{minted}
 
 \section{Function Types}
@@ -293,31 +309,7 @@ child{node [sup] (anyref) {AnyRef}
     ;
   \end{tikzpicture}
 \end{center}
-\subsection{Either}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
-\subsection{Either}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
-\subsection{Either}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
-\subsection{Either}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
-\subsection{Either}
+\subsection{Option}
 \begin{itemize}
 \item getOrElse
 \item fold
@@ -335,6 +327,41 @@ child{node [sup] (anyref) {AnyRef}
 \item fold
 \item ...
 \end{itemize}
+
+\section{Operators}
+\begin{itemize}
+\item \textit{precedence} is determined by the \textit{first} character of the
+  method's name:
+
+\begin{minted}{scala}
+(lowest)   letters
+    v      |
+    v      ^
+    v      &
+    v      = !
+    v      < >
+    v      :
+    v      + -
+    v      * / %
+(highest)  other special characters
+\end{minted}
+\item \textit{associativity} is determined by the \textit{last}
+  character of the method's name.
+\end{itemize}
+
+\section{Ranges}
+
+\begin{minted}{scala}
+// Exclusive range: 1,2,3,4
+1 until 5
+
+// Inclusive range: 1,2,3,4,5
+1 to 5
+
+// Custom step size: 1,3,5
+1.to(5,2)
+
+\end{minted}
 
 \section{Futures}
 
@@ -355,9 +382,7 @@ child{node [sup] (anyref) {AnyRef}
 
 \section{Type Parameters}
 
-
 \section{Type Hierarchy}
-Text 2
 
 \section{IntelliJ}
 \begin{tabular}{l l}
@@ -365,7 +390,8 @@ Text 2
   Extract Method & \Ctrl+\Alt+\keystroke{M} \\
   Rename & \Shift+\keystroke{F6} \\
   Expand selection & \Ctrl+\keystroke{W} \\
-  Surround with & \Ctrl+\Alt+\keystroke{T}
+  Surround with & \Ctrl+\Alt+\keystroke{T} \\
+  foo & bar
 \end{tabular}
 
 \end{multicols*}
