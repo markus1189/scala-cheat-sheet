@@ -96,7 +96,8 @@
 
 ** TODO map / flatMap / (with)Filter, the holy trinity
 ** TODO for expression / for loop
-** TODO imports:
+** DONE imports:
+   CLOSED: [2017-05-15 Mon 21:18]
    - import foo.x
    - import foo.{x,y}
    - import foo.x, bar.y
@@ -116,11 +117,19 @@
 ** TODO usage of underscores
 ** TODO "sealed" modifier
 ** TODO constructors via this
-** TODO access
-   - private
-   - private[this]
-   - private[<package>]
-   - ... and friends
+** TODO Modifiers
+- private
+  - object-private
+  - class-private
+  - qualified-private
+- protected
+  - object-protected
+- override
+- abstract override
+- abstract
+- final
+- sealed
+- lazy
 ** TODO sbt:
    - simple build?
    - compile / test / test:compile / ~test / etc
@@ -150,3 +159,4 @@
    - show implicit conversions
    - ...
 ** TODO collection performance overview?
+** TODO Early definitions
