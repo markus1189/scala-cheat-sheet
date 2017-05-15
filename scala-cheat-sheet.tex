@@ -331,7 +331,7 @@ child{node [sup] (anyref) {AnyRef}
 \section{Operators}
 \begin{itemize}
 \item \textit{precedence} is determined by the \textit{first} character of the
-  method's name:
+  operator's name:
 
 \begin{minted}{scala}
 (lowest)   letters
@@ -346,7 +346,9 @@ child{node [sup] (anyref) {AnyRef}
 (highest)  other special characters
 \end{minted}
 \item \textit{associativity} is determined by the \textit{last}
-  character of the method's name.
+  character of the operator's name.  If the last character is a
+  \mintinline{scala}|:| it is right-associative, otherwise it is
+  left-associative
 \end{itemize}
 
 \section{Ranges}
@@ -390,8 +392,7 @@ child{node [sup] (anyref) {AnyRef}
   Extract Method & \Ctrl+\Alt+\keystroke{M} \\
   Rename & \Shift+\keystroke{F6} \\
   Expand selection & \Ctrl+\keystroke{W} \\
-  Surround with & \Ctrl+\Alt+\keystroke{T} \\
-  foo & bar
+  Surround with & \Ctrl+\Alt+\keystroke{T}
 \end{tabular}
 
 \end{multicols*}
