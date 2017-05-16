@@ -424,7 +424,41 @@ lazy
 
 \section{Type Parameters}
 
-\section{Type Hierarchy}
+\section{Pattern Matching}
+\begin{minted}{scala}
+arg match {
+  // Variable Patterns
+  case x =>
+
+  // Typed Patterns
+  case x: String =>
+
+  // Literal Patterns
+  case 42 =>
+
+  // Stable Identifier Patterns
+  case `foo` =>
+
+  // Constructor Patterns
+  case Foo(x,y) =>
+
+  // Tuple Patterns
+  case (x,y,z) =>
+
+  // Extractor Patterns
+  case E(x) =>
+
+  // Pattern Sequences
+  TODO
+
+  // Pattern Alternatives
+  case true | 42 | "str" =>
+
+  // Pattern Binders
+  case pair@(x,y) =>
+
+}
+\end{minted}
 
 \section{IntelliJ}
 \begin{tabular}{l l}

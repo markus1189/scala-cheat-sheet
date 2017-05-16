@@ -152,7 +152,8 @@
    - while (...) { ... }
    - do { ... } while(...)
    - try / catch / finally
-** TODO varargs
+** DONE varargs
+   CLOSED: [2017-05-16 Tue 21:47]
 ** TODO type alias / type members
 ** TODO IntelliJ shortcuts
    - show implicit parameters
