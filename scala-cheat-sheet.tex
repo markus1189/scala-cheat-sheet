@@ -477,10 +477,11 @@ arg match {
   case (x,y,z) =>
 
   // Extractor Patterns
-  case E(x) =>
+  // (See 'Custom Extractors')
+  case NumString(x) =>
 
   // Pattern Sequences
-  TODO
+  case x1 +: x2 +: xs =>
 
   // Pattern Alternatives
   case true | 42 | "str" =>
