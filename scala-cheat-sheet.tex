@@ -65,8 +65,9 @@ leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 \makeatletter
 
 \newcommand{\colorsection}[1]{\colorbox{sectionbg}{\parbox{\textwidth-215\fboxsep}{\centering#1}}}
+\newcommand{\colorsubsection}[1]{\footnotesize\colorbox{sectionbg!40}{\parbox{\textwidth-215\fboxsep}{\centering#1}}}
 \titleformat{\section}[block]{\color{myblue}\sffamily\small\bfseries\filcenter}{}{1em}{\colorsection}
-\titleformat{\subsection}[block]{\color{myblue}\sffamily\small\bfseries\filcenter}{}{1em}{}
+\titleformat{\subsection}[block]{\color{myblue}\sffamily\small\bfseries\filcenter}{}{1em}{\colorsubsection}
 
 \def\multi@column@out{%
    \ifnum\outputpenalty <-\@M
@@ -429,13 +430,14 @@ for (i <- 1 to 3; j <- 1 to i) yield i * y
 // guards in for-loops and for-comprehensions
 for (i <- 1 to 5 if i > 4) yield i
 
-// use curly braces for multiline expressions
+// curly braces for multiline expressions
 for {
   i <- 1 to 5
   j <- 1 to i
   if j % 2 == 1
 } yield i * j
 \end{minted}
+
 \section{Futures}
 
 \subsection{Timeouts}
@@ -494,6 +496,8 @@ arg match {
 
 \section{Custom Extractors}
 
+\subsection{unapply with Boolean}
+
 \begin{minted}{scala}
 object Even {
   def unapply(n: Int): Boolean =
@@ -508,6 +512,8 @@ scala.MatchError: 41 ...
 res: String = "even!"
 \end{minted}
 
+\subsection{unapply with Option}
+
 \begin{minted}{scala}
 object NumString {
   def unapply(s: String): Option[Int] =
@@ -521,6 +527,8 @@ res: Int = 42
 > "scala" match { case NumString(n) => n }
 scala.MatchError: scala
 \end{minted}
+
+\subsection{unapplySeq}
 
 \begin{minted}{scala}
 object Words {
