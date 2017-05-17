@@ -184,7 +184,7 @@ leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 \setlength{\parindent}{0pt}
 
 \begin{document}
-\setminted{style=colorful}
+\setminted{style=manni}
 
 \small
 \begin{multicols*}{4}
@@ -458,6 +458,50 @@ arg match {
   case pair@(x,y) =>
 
 }
+\end{minted}
+
+\section{Custom Extractors}
+
+\begin{minted}{scala}
+object Even {
+  def unapply(n: Int): Boolean =
+    n % 2 == 0
+}
+\end{minted}
+
+\begin{minted}{text}
+> 41 match { case Even() => '!' }
+scala.MatchError: 41 ...
+> 42 match { case Even() => "even!" }
+res: String = "even!"
+\end{minted}
+
+\begin{minted}{scala}
+object NumString {
+  def unapply(s: String): Option[Int] =
+    Try(s.toInt).toOption
+}
+\end{minted}
+
+\begin{minted}{text}
+> "42" match { case NumString(n) => n }
+res: Int = 42
+> "scala" match { case NumString(n) => n }
+scala.MatchError: scala
+\end{minted}
+
+\begin{minted}{scala}
+object Words {
+  def unapplySeq(s: String): Option[Seq[String]] =
+    Some(s.split("\\s+").to[Seq])
+}
+\end{minted}
+
+\begin{minted}{text}
+> "foo bar baz" match { case Words(ws) => ws }
+res: Seq[String] = Vector("foo", "bar", "baz")
+> "test" match { case Words("foo" +: _) => 1 }
+scala.MatchError: test
 \end{minted}
 
 \section{IntelliJ}
