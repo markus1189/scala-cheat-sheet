@@ -405,6 +405,37 @@ sealed
 lazy
 \end{minted}
 
+\section{Loops}
+\begin{minted}{scala}
+// while-loop
+while (<condition>) {
+  <expression>
+}
+
+// do-while-loop
+do {
+  <expression>
+} while (<condition>)
+
+// for-loop
+for (i <- 1 to 10) println(i)
+
+// nested for-loop
+for (i <- 1 to 10; j <- 1 to 10) println(i,j)
+
+// for-comprehension
+for (i <- 1 to 3; j <- 1 to i) yield i * y
+
+// guards in for-loops and for-comprehensions
+for (i <- 1 to 5 if i > 4) yield i
+
+// use curly braces for multiline expressions
+for {
+  i <- 1 to 5
+  j <- 1 to i
+  if j % 2 == 1
+} yield i * j
+\end{minted}
 \section{Futures}
 
 \subsection{Timeouts}
