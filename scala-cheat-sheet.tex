@@ -544,11 +544,17 @@ res: Seq[String] = Vector("foo", "bar", "baz")
 scala.MatchError: test
 \end{minted}
 
-\section{IntelliJ}
+\section{IntelliJ Scala}
 \begin{tabular}{l l}
   Reformat & \Ctrl+\Alt+\keystroke{L} \\
   Expand selection & \Ctrl+\keystroke{W} \\
   Surround with & \Ctrl+\Alt+\keystroke{T}
+\end{tabular}
+
+\subsection{Implicits}
+\begin{tabular}{l l}
+  Implicit parameters & \Ctrl+\Shift+\keystroke{P} \\
+  Implicit conversions & \Ctrl+\Shift+\keystroke{Q}
 \end{tabular}
 
 \subsection{Refactor}
@@ -564,14 +570,15 @@ scala.MatchError: test
 
 \subsection{Run, Debug, Stop}
 \begin{tabular}{l l}
+  Stop & \Ctrl+\keystroke{F2} \\
   Debug & \Ctrl+\keystroke{F9} \\
-  Debug last & \Shift+\keystroke{F9} \\
-  Stop & \Ctrl+\keystroke{F2}
+  Debug last & \Shift+\keystroke{F9}
 \end{tabular}
 
 \subsection{Breakpoints}
 \begin{tabular}{l l}
   Toggle breakpoint & \Ctrl+\keystroke{F8} \\
+  View breakpoints & \Ctrl+\Shift+\keystroke{F8} \\
   Temporary breakpoint & \Ctrl+\Shift+\Alt+\keystroke{F8}
 \end{tabular}
 
