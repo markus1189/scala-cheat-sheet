@@ -65,7 +65,7 @@ leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 \makeatletter
 
 \newcommand{\colorsection}[1]{\colorbox{sectionbg}{\parbox{\textwidth-215\fboxsep}{\centering#1}}}
-\newcommand{\colorsubsection}[1]{\footnotesize\colorbox{sectionbg!40}{\parbox{\textwidth-235\fboxsep}{\centering#1}}}
+\newcommand{\colorsubsection}[1]{\footnotesize\colorbox{sectionbg}{\parbox{\textwidth-250\fboxsep}{\centering#1}}}
 \titleformat{\section}[block]{\color{myblue}\sffamily\small\bfseries\filcenter}{}{1em}{\colorsection}
 \titleformat{\subsection}[block]{\color{myblue}\sffamily\small\bfseries\filcenter}{}{1em}{\colorsubsection}
 
@@ -183,6 +183,8 @@ leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 
 \makeatother
 \setlength{\parindent}{0pt}
+
+\mdfsetup{middlelinecolor=myblue, middlelinewidth=1pt, roundcorner=10pt}
 
 \begin{document}
 \setminted{style=manni,fontsize=\footnotesize}
@@ -311,18 +313,30 @@ child{node [sup] (anyref) {AnyRef}
   \end{tikzpicture}
 \end{center}
 \subsection{Option}
+\begin{mdframed}
+Replaces \texttt{null}, there is only \textit{one} obvious
+reason for a missing value.
+\end{mdframed}
 \begin{itemize}
 \item getOrElse
 \item fold
 \item ...
 \end{itemize}
 \subsection{Either}
+\begin{mdframed}
+  \textit{Domain} errors that have to be handled, there are
+  \textit{multiple} reasons for an error.
+\end{mdframed}
 \begin{itemize}
 \item getOrElse
 \item fold
 \item ...
 \end{itemize}
 \subsection{Try}
+\begin{mdframed}
+  Interact with Java / Legacy Code where exceptions are thrown, a
+  means of last resort.
+\end{mdframed}
 \begin{itemize}
 \item getOrElse
 \item fold
