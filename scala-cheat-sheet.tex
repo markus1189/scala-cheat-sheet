@@ -222,37 +222,29 @@ def many(cs: Char*): Seq[Char] = cs
 scala> many(Seq('1', '2') :_*)
 \end{minted}
 
-\section{Types}
+\section{Operators}
+\begin{itemize}
+\item \textit{precedence} is determined by the \textit{first} character of the
+  operator's name:
 
-\begin{center}
-\begin{tikzpicture}[auto,grow=right]
-\tikzstyle{level 1}=[sibling distance=16em,level distance=3em]
-\tikzstyle{level 2}=[sibling distance=4em,level distance=6em]
-\node [sup] (any) {Any}
-child{node [sup] (anyval) {AnyVal}
-    child{node [sub] (nums) {Numbers}}
-    child{node [sub] (char) {Char}}
-    child{node [sub,fill=myred!60] (char) {Your AnyVal}}
-    child{node [sub] (bool) {Boolean}}
-}
-child{node [sup] (anyref) {AnyRef}
-    child{node [sub] (colls) {Collections}}
-    child{node [sub,fill=myred!60] (clss) {Your Class}}
-    child{node [sub] (str) {String}}
-};
-\node[sup,xshift=1cm,right of=clss](null){Null};
-\node[sup,xshift=4.5cm,right of=any](nothing){Nothing};
-\node[sup,above of=anyref](obj){Object};
-\path [line] (null) -- (str);
-\path [line] (null) -- (colls);
-\path [line] (null) -- (clss);
-\path [line] (nothing) -- (null);
-\path [line] (nothing) -- (bool);
-\path [line] (nothing) -- (char);
-\path [line] (nothing) -- (nums);
-\path [line,dashed] (obj) -- (anyref);
-\end{tikzpicture}
-\end{center}
+  \begin{tabular}{l | l}
+    lowest & letters \\
+           & \mintinline{scala}/|/ \\
+           & \mintinline{scala}|^| \\
+           & \mintinline{scala}|&| \\
+           & \mintinline{scala}|= !| \\
+           & \mintinline{scala}|< >| \\
+           & \mintinline{scala}|:| \\
+           & \mintinline{scala}|+ -| \\
+           & \mintinline{scala}|* / %| \\
+    highest & other special characters
+
+  \end{tabular}
+\item \textit{associativity} is determined by the \textit{last}
+  character of the operator's name.  If the last character is a
+  \mintinline{scala}|:| it is right-associative, otherwise it is
+  left-associative
+\end{itemize}
 
 \section{Option, Either, Try}
 
@@ -352,35 +344,21 @@ res: Try[Int] = Success(42)
 
 \section{Collections}
 
+- collections
+
+\section{Inheritance}
+
+- inheritance
+
+\section{Classes}
+
+- classes
+- case classes
 \begin{itemize}
 \item hierarchy?
 \item mutable / immutable
 \item list vs vector
 \item map, set, ...
-\end{itemize}
-
-\section{Operators}
-\begin{itemize}
-\item \textit{precedence} is determined by the \textit{first} character of the
-  operator's name:
-
-  \begin{tabular}{l | l}
-    lowest & letters \\
-           & \mintinline{scala}/|/ \\
-           & \mintinline{scala}|^| \\
-           & \mintinline{scala}|&| \\
-           & \mintinline{scala}|= !| \\
-           & \mintinline{scala}|< >| \\
-           & \mintinline{scala}|:| \\
-           & \mintinline{scala}|+ -| \\
-           & \mintinline{scala}|* / %| \\
-    highest & other special characters
-
-  \end{tabular}
-\item \textit{associativity} is determined by the \textit{last}
-  character of the operator's name.  If the last character is a
-  \mintinline{scala}|:| it is right-associative, otherwise it is
-  left-associative
 \end{itemize}
 
 \section{Ranges}
@@ -471,6 +449,13 @@ for {
 \end{minted}
 
 \section{Futures}
+
+\begin{itemize}
+\item duration dsl
+\item awaiting results (with note)
+\item execution context (with warning)
+\item sequencing futures
+\end{itemize}
 
 \subsection{Timeouts}
 \begin{itemize}
@@ -577,6 +562,38 @@ res: Seq[String] = Vector("foo", "bar", "baz")
 > "test" match { case Words("foo" +: _) => 1 }
 scala.MatchError: test
 \end{minted}
+
+\section{Types}
+
+\begin{center}
+\begin{tikzpicture}[auto,grow=right]
+\tikzstyle{level 1}=[sibling distance=16em,level distance=3em]
+\tikzstyle{level 2}=[sibling distance=4em,level distance=6em]
+\node [sup] (any) {Any}
+child{node [sup] (anyval) {AnyVal}
+    child{node [sub] (nums) {Numbers}}
+    child{node [sub] (char) {Char}}
+    child{node [sub,fill=myred!60] (char) {Your AnyVal}}
+    child{node [sub] (bool) {Boolean}}
+}
+child{node [sup] (anyref) {AnyRef}
+    child{node [sub] (colls) {Collections}}
+    child{node [sub,fill=myred!60] (clss) {Your Class}}
+    child{node [sub] (str) {String}}
+};
+\node[sup,xshift=1cm,right of=clss](null){Null};
+\node[sup,xshift=4.5cm,right of=any](nothing){Nothing};
+\node[sup,above of=anyref](obj){Object};
+\path [line] (null) -- (str);
+\path [line] (null) -- (colls);
+\path [line] (null) -- (clss);
+\path [line] (nothing) -- (null);
+\path [line] (nothing) -- (bool);
+\path [line] (nothing) -- (char);
+\path [line] (nothing) -- (nums);
+\path [line,dashed] (obj) -- (anyref);
+\end{tikzpicture}
+\end{center}
 
 \section{IntelliJ Scala}
 
