@@ -223,11 +223,11 @@ scala> many(Seq('1', '2') :_*)
 \end{minted}
 
 \section{Types}
+
 \begin{center}
 \begin{tikzpicture}[auto,grow=right]
 \tikzstyle{level 1}=[sibling distance=16em,level distance=3em]
 \tikzstyle{level 2}=[sibling distance=4em,level distance=6em]
-% Place nodes
 \node [sup] (any) {Any}
 child{node [sup] (anyval) {AnyVal}
     child{node [sub] (nums) {Numbers}}
@@ -243,7 +243,6 @@ child{node [sup] (anyref) {AnyRef}
 \node[sup,xshift=1cm,right of=clss](null){Null};
 \node[sup,xshift=4.5cm,right of=any](nothing){Nothing};
 \node[sup,above of=anyref](obj){Object};
-%% Draw edges
 \path [line] (null) -- (str);
 \path [line] (null) -- (colls);
 \path [line] (null) -- (clss);
@@ -254,7 +253,9 @@ child{node [sup] (anyref) {AnyRef}
 \path [line,dashed] (obj) -- (anyref);
 \end{tikzpicture}
 \end{center}
+
 \section{Option, Either, Try}
+
 \subsection{Option}
 \begin{mdframed}
 Replaces \texttt{null}, there is only \textit{one} obvious
@@ -269,7 +270,7 @@ reason for a missing value.
     ;
   \end{tikzpicture}
 \end{center}
-kkjk-\begin{minted}{scala}
+\begin{minted}{scala}
 val some: Option[Int] = Some(1)
 val none: Option[Int] = None
 
@@ -348,6 +349,16 @@ res: Try[Int] =
 > Try { "42".toInt }
 res: Try[Int] = Success(42)
 \end{minted}
+
+\section{Collections}
+
+\begin{itemize}
+\item hierarchy?
+\item mutable / immutable
+\item list vs vector
+\item map, set, ...
+\end{itemize}
+
 \section{Operators}
 \begin{itemize}
 \item \textit{precedence} is determined by the \textit{first} character of the
@@ -409,6 +420,7 @@ import scala.util.Try, scala.util.Success
 \end{minted}
 
 \section{Modifiers}
+
 \begin{minted}{scala}
 private
 private[this]
@@ -426,6 +438,7 @@ lazy
 \end{minted}
 
 \section{Loops}
+
 \begin{minted}{scala}
 // while-loop
 while (<condition>) {
@@ -469,6 +482,7 @@ for {
 \end{itemize}
 
 \section{Implicits}
+
 \begin{itemize}
 \item implicit conversions
 \item implicit arguments
@@ -477,6 +491,7 @@ for {
 \section{Type Parameters}
 
 \section{Pattern Matching}
+
 \begin{minted}{scala}
 arg match {
   // Variable Patterns
@@ -564,6 +579,7 @@ scala.MatchError: test
 \end{minted}
 
 \section{IntelliJ Scala}
+
 \begin{tabular}{l l}
   Reformat & \Ctrl+\Alt+\keystroke{L} \\
   Expand selection & \Ctrl+\keystroke{W} \\
@@ -571,6 +587,7 @@ scala.MatchError: test
 \end{tabular}
 
 \subsection{Implicits}
+
 \begin{tabular}{l l}
   Implicit parameters & \Ctrl+\Shift+\keystroke{P} \\
   Implicit conversions & \Ctrl+\Shift+\keystroke{Q}
