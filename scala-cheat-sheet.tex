@@ -222,36 +222,6 @@ def many(cs: Char*): Seq[Char] = cs
 scala> many(Seq('1', '2') :_*)
 \end{minted}
 
-\section{Function Types}
-\begin{center}
-\begin{minipage}{0.37\linewidth}
-\begin{minted}{scala}
-   ()      => A
- Unit      => A
-    A      => B
-(A, B)     => C
-(A, .., V) => W
-\end{minted}
-\end{minipage}
-\begin{minipage}{0.09\linewidth}
-  \begin{minted}{text}
-==
-==
-==
-==
-==
-  \end{minted}
-\end{minipage}
-\begin{minipage}{0.50\linewidth}
-\begin{minted}{scala}
-Function0[A]
-Function1[Unit, A]
-Function1[A, B]
-Function2[A, B, C]
-Function22[A, .., V, W]
-\end{minted}
-\end{minipage}
-\end{center}
 \section{Types}
 \begin{center}
 \begin{tikzpicture}[auto,grow=right]
