@@ -13,6 +13,8 @@
 \usepackage{minted}
 \usepackage{titlesec}
 \usepackage{keystroke}
+\usepackage{todonotes}
+\newcommand{\TODO}[2][]{\todo[inline,color=green!40,linecolor=green!50,#1]{\small TODO #2}}
 
 \renewcommand\familydefault{\sfdefault}
 
@@ -398,6 +400,7 @@ import scala.util.Try, scala.util.Success
 \end{minted}
 
 \section{Modifiers}
+\TODO{}
 
 \begin{minted}{scala}
 private
@@ -449,6 +452,7 @@ for {
 \end{minted}
 
 \section{Futures}
+\TODO{}
 
 \begin{itemize}
 \item duration dsl
@@ -458,6 +462,7 @@ for {
 \end{itemize}
 
 \subsection{Timeouts}
+\TODO{}
 \begin{itemize}
 \item
   \begin{minted}{scala}
@@ -467,6 +472,7 @@ for {
 \end{itemize}
 
 \section{Implicits}
+\TODO{}
 
 \begin{itemize}
 \item implicit conversions
@@ -474,6 +480,7 @@ for {
 \end{itemize}
 
 \section{Type Parameters}
+\TODO{}
 
 \begin{minted}{scala}
 // Two type parameters A and B
