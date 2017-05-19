@@ -368,25 +368,16 @@ res: Either[Int, Int] = Left(4)
   Interact with Java / Legacy Code where exceptions are thrown, a
   means of last resort.
 \end{mdframed}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
+\begin{minted}{scala}
+> import scala.util.Try
 
-\subsection{Conversions}
-\begin{center}
-  \begin{tikzpicture}
-    \node[sup](opt){Option[A]};
-    \node[sup, below left of=opt, xshift=-15mm, yshift=-15mm](either){Either[A, B]};
-    \node[sup, below right of=opt, xshift=15mm, yshift=-15mm](try){Try[A]};
+> Try { "hello".toInt }
+res: Try[Int] =
+  Failure(java.lang.NumberFormatException)
 
-    \draw [line, <->] (opt.west) to [bend right=30] node{toRight} (either.north);
-    \draw [line, <->] (either.east) to (try.west);
-    \draw [line, <->] (try.north) to [bend right=30] (opt.east);
-    ;
-  \end{tikzpicture}
-\end{center}
+> Try { "42".toInt }
+res: Try[Int] = Success(42)
+\end{minted}
 \section{Operators}
 \begin{itemize}
 \item \textit{precedence} is determined by the \textit{first} character of the
