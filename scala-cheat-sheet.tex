@@ -317,21 +317,52 @@ child{node [sup] (anyref) {AnyRef}
 Replaces \texttt{null}, there is only \textit{one} obvious
 reason for a missing value.
 \end{mdframed}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
+\begin{minted}{scala}
+val some: Option[Int] = Some(1)
+val none: Option[Int] = None
+
+// getOrElse
+> some.getOrElse(42)
+res: Int = 1
+> none.getOrElse(42)
+res: Int = 42
+
+// fold
+> some.fold("")(_.toString)
+res: String = "1"
+> none.fold("")(_.toString)
+res: String = ""
+
+// orElse
+> some.orElse(none)
+res: Option[Int] = Some(1)
+> none.orElse(Some(42))
+res: Option[Int] = Some(42)
+
+\end{minted}
 \subsection{Either}
 \begin{mdframed}
   \textit{Domain} errors that have to be handled, there are
   \textit{multiple} reasons for an error.
 \end{mdframed}
-\begin{itemize}
-\item getOrElse
-\item fold
-\item ...
-\end{itemize}
+\begin{minted}{scala}
+val right: Either[String, Int] = Right(1)
+val left:  Either[String, Int] = Left("oops")
+
+// getOrElse
+> right.getOrElse(42)
+res: Int = 1
+> left.getOrElse(42)
+res: Int = 42
+
+// map on left and right side
+> right.map(_ + 1)
+res: Either[String, Int] = Right(2)
+> right.left.map(_.length)
+res: Either[Int, Int] = Right(1)
+> left.left.map(_.length)
+res: Either[Int, Int] = Left(4)
+\end{minted}
 \subsection{Try}
 \begin{mdframed}
   Interact with Java / Legacy Code where exceptions are thrown, a
@@ -343,6 +374,19 @@ reason for a missing value.
 \item ...
 \end{itemize}
 
+\subsection{Conversions}
+\begin{center}
+  \begin{tikzpicture}
+    \node[sup](opt){Option[A]};
+    \node[sup, below left of=opt, xshift=-15mm, yshift=-15mm](either){Either[A, B]};
+    \node[sup, below right of=opt, xshift=15mm, yshift=-15mm](try){Try[A]};
+
+    \draw [line, <->] (opt.west) to [bend right=30] node{toRight} (either.north);
+    \draw [line, <->] (either.east) to (try.west);
+    \draw [line, <->] (try.north) to [bend right=30] (opt.east);
+    ;
+  \end{tikzpicture}
+\end{center}
 \section{Operators}
 \begin{itemize}
 \item \textit{precedence} is determined by the \textit{first} character of the
