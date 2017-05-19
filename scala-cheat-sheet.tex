@@ -475,6 +475,20 @@ for {
 
 \section{Type Parameters}
 
+\begin{minted}{scala}
+// Two type parameters A and B
+def foo[A, B](x: Int) = ???
+
+// Upper Bound, A has to be a subtype
+def foo[A <: String]
+
+// Lower Bound, A has to be a supertype
+def foo[A :> String]
+
+// Context Bound
+def foo[A:]
+\end{minted}
+
 \section{Pattern Matching}
 
 \begin{minted}{scala}
