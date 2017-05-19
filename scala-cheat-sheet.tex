@@ -285,6 +285,11 @@ child{node [sup] (anyref) {AnyRef}
 \end{tikzpicture}
 \end{center}
 \section{Option, Either, Try}
+\subsection{Option}
+\begin{mdframed}
+Replaces \texttt{null}, there is only \textit{one} obvious
+reason for a missing value.
+\end{mdframed}
 \begin{center}
   \begin{tikzpicture}[
     level 1/.style={sibling distance=10em}]
@@ -294,30 +299,7 @@ child{node [sup] (anyref) {AnyRef}
     ;
   \end{tikzpicture}
 \end{center}
-\begin{center}
-  \begin{tikzpicture}[
-    level 1/.style={sibling distance=10em}]
-    \node[sup]{Either[A, B]}
-    child{node[sub] {Left[A](value: A)}}
-    child{node[sub]{Right[B](value: B)}}
-    ;
-  \end{tikzpicture}
-\end{center}
-\begin{center}
-  \begin{tikzpicture}[
-    level 1/.style={sibling distance=12em}]
-    \node[sup]{Try[A]}
-    child{node[sub] {Failure[A](e: Throwable)}}
-    child{node[sub]{Success[A](value: A)}}
-    ;
-  \end{tikzpicture}
-\end{center}
-\subsection{Option}
-\begin{mdframed}
-Replaces \texttt{null}, there is only \textit{one} obvious
-reason for a missing value.
-\end{mdframed}
-\begin{minted}{scala}
+kkjk-\begin{minted}{scala}
 val some: Option[Int] = Some(1)
 val none: Option[Int] = None
 
@@ -345,6 +327,15 @@ res: Option[Int] = Some(42)
   \textit{Domain} errors that have to be handled, there are
   \textit{multiple} reasons for an error.
 \end{mdframed}
+\begin{center}
+  \begin{tikzpicture}[
+    level 1/.style={sibling distance=10em}]
+    \node[sup]{Either[A, B]}
+    child{node[sub] {Left[A](value: A)}}
+    child{node[sub]{Right[B](value: B)}}
+    ;
+  \end{tikzpicture}
+\end{center}
 \begin{minted}{scala}
 val right: Either[String, Int] = Right(1)
 val left:  Either[String, Int] = Left("oops")
@@ -368,6 +359,15 @@ res: Either[Int, Int] = Left(4)
   Interact with Java / Legacy Code where exceptions are thrown, a
   means of last resort.
 \end{mdframed}
+\begin{center}
+  \begin{tikzpicture}[
+    level 1/.style={sibling distance=10em}]
+    \node[sup]{Try[A]}
+    child{node[sub] {Failure[A](e: Throwable)}}
+    child{node[sub]{Success[A](value: A)}}
+    ;
+  \end{tikzpicture}
+\end{center}
 \begin{minted}{scala}
 > import scala.util.Try
 
