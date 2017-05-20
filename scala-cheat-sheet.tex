@@ -300,9 +300,8 @@ object Foo {
   def world: String = "World"
 }
 
-// Special case:
+// Companion module:
 // class and object share name and source file
-// => the object becomes a companion module
 class Bar
 object Bar { ... }
 \end{minted}
@@ -377,9 +376,8 @@ arg match {
 
   \section{Custom Extractors}
 
-  \subsection{unapply with Boolean}
-
 \begin{minted}{scala}
+// Return Boolean from unapply
 object Even {
   def unapply(n: Int): Boolean =
     n % 2 == 0
@@ -393,9 +391,8 @@ scala.MatchError: 41 ...
 res: String = "even!"
 \end{minted}
 
-  \subsection{unapply with Option}
-
 \begin{minted}{scala}
+// Return Option from unapply
 object NumString {
   def unapply(s: String): Option[Int] =
     Try(s.toInt).toOption
@@ -409,9 +406,8 @@ res: Int = 42
 scala.MatchError: scala
 \end{minted}
 
-  \subsection{unapplySeq}
-
 \begin{minted}{scala}
+// Define unapplySeq
 object Words {
   def unapplySeq(s: String): Option[Seq[String]] =
     Some(s.split("\\s+").to[Seq])
