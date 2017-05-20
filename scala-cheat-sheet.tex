@@ -456,6 +456,13 @@ for {
   \section{Futures}
 
   \TODO{Imports okay? Needed for line length}
+  \begin{mdframed}
+    Don't blindly import Scala's default \texttt{ExecutionContext}, it
+    is optimized for CPU-bound tasks.  Using it for blocking tasks
+    will lead to starvation.
+  \end{mdframed}
+
+
 \begin{minted}{scala}
 > import scala.concurrent._
 > import ExecutionContext.Implicits.global
@@ -473,16 +480,28 @@ res2: Future[Int] = Future(<not completed>)
 > res2.flatMap((n: Int) => Future { n * 2 })
 res3: Future[Int] = Future(<not completed>)
 
+// Register callbacks
+> res3.onComplete {
+  case Success(r) => println(s"Success: $r")
+  case Failure(e) => println(s"Failure: $e")
+}
+
 // Waiting for the result
 // Avoid this, as much as possible
 > Await.result(res3, 1.second)
 res4: Int = 42
 \end{minted}
-  \begin{mdframed}
-    Don't blindly import the suggested \texttt{ExecutionContext}.  It
-    is optimized for CPU-bound tasks and using it for blocking tasks
-    will lead to starvation.
-    \end{mdframed}
+  \subsection{Duration DSL}
+
+\begin{minted}{scala}
+> import scala.concurrent.duration._
+> 5.seconds
+res: FiniteDuration = 5 seconds
+> 2.hours
+res: FiniteDuration = 2 hours
+> 100.millis
+res: FiniteDuration = 100 milliseconds
+\end{minted}
 
   \section{Implicits}
   \TODO{}
