@@ -634,7 +634,7 @@ res: FiniteDuration = 100 milliseconds
       child{node [sup] (anyval) {AnyVal}
         child{node [sub] (nums) {Numbers}}
         child{node [sub] (char) {Char}}
-        child{node [sub,fill=myred!60] (char) {Your AnyVal}}
+        child{node [sub,fill=myred!60] (yanyval) {Your AnyVal}}
         child{node [sub] (bool) {Boolean}}
       }
       child{node [sup] (anyref) {AnyRef}
@@ -650,6 +650,7 @@ res: FiniteDuration = 100 milliseconds
       \path [line] (null) -- (clss);
       \path [line] (nothing) -- (null);
       \path [line] (nothing) -- (bool);
+      \path [line] (nothing) -- (yanyval);
       \path [line] (nothing) -- (char);
       \path [line] (nothing) -- (nums);
       \path [line,dashed] (obj) -- (anyref);
