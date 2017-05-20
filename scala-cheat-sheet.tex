@@ -470,6 +470,39 @@ def foo(implicit ec: ExecutionContext) = ???
   \newpage{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+  \section{Types}
+
+  \begin{center}
+    \begin{tikzpicture}[auto,grow=right]
+      \tikzstyle{level 1}=[sibling distance=16em,level distance=3em]
+      \tikzstyle{level 2}=[sibling distance=4em,level distance=6em]
+      \node [sup] (any) {Any}
+      child{node [sup] (anyval) {AnyVal}
+        child{node [sub] (nums) {Numbers}}
+        child{node [sub] (char) {Char}}
+        child{node [sub] (bool) {Boolean}}
+        child{node [sub,fill=myred!60] (yanyval) {Your AnyVal}}
+      }
+      child{node [sup] (anyref) {AnyRef}
+        child{node [sub] (colls) {Collections}}
+        child{node [sub,fill=myred!60] (clss) {Your Class}}
+        child{node [sub] (str) {String}}
+      };
+      \node[sup,xshift=1cm,right of=clss](null){Null};
+      \node[sup,xshift=4.5cm,right of=any](nothing){Nothing};
+      \node[sup,above of=anyref](obj){Object};
+      \path [line] (null) -- (str);
+      \path [line] (null) -- (colls);
+      \path [line] (null) -- (clss);
+      \path [line] (nothing) -- (null);
+      \path [line] (nothing) -- (bool);
+      \path [line] (nothing) -- (yanyval);
+      \path [line] (nothing) -- (char);
+      \path [line] (nothing) -- (nums);
+      \path [line,dashed] (obj) -- (anyref);
+    \end{tikzpicture}
+  \end{center}
+
   \section{Option, Either, Try}
 
   \subsection{Option}
@@ -623,39 +656,6 @@ res: FiniteDuration = 2 hours
 > 100.millis
 res: FiniteDuration = 100 milliseconds
 \end{minted}
-
-  \section{Types}
-
-  \begin{center}
-    \begin{tikzpicture}[auto,grow=right]
-      \tikzstyle{level 1}=[sibling distance=16em,level distance=3em]
-      \tikzstyle{level 2}=[sibling distance=4em,level distance=6em]
-      \node [sup] (any) {Any}
-      child{node [sup] (anyval) {AnyVal}
-        child{node [sub] (nums) {Numbers}}
-        child{node [sub] (char) {Char}}
-        child{node [sub] (bool) {Boolean}}
-        child{node [sub,fill=myred!60] (yanyval) {Your AnyVal}}
-      }
-      child{node [sup] (anyref) {AnyRef}
-        child{node [sub] (colls) {Collections}}
-        child{node [sub,fill=myred!60] (clss) {Your Class}}
-        child{node [sub] (str) {String}}
-      };
-      \node[sup,xshift=1cm,right of=clss](null){Null};
-      \node[sup,xshift=4.5cm,right of=any](nothing){Nothing};
-      \node[sup,above of=anyref](obj){Object};
-      \path [line] (null) -- (str);
-      \path [line] (null) -- (colls);
-      \path [line] (null) -- (clss);
-      \path [line] (nothing) -- (null);
-      \path [line] (nothing) -- (bool);
-      \path [line] (nothing) -- (yanyval);
-      \path [line] (nothing) -- (char);
-      \path [line] (nothing) -- (nums);
-      \path [line,dashed] (obj) -- (anyref);
-    \end{tikzpicture}
-  \end{center}
 
   \section{IntelliJ Scala}
 
