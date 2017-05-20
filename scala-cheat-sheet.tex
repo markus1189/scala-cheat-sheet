@@ -504,13 +504,30 @@ res: FiniteDuration = 100 milliseconds
 \end{minted}
 
   \section{Implicits}
-  \TODO{}
+  There are two categories of places where Scala searches for implicits:
+  \begin{enumerate}
+  \item identifiers accessible without prefix at the call-site
+  \item implicit scope: all companion modules of classes associated
+    with the implicit's type
+  \end{enumerate}
 
-  \begin{itemize}
-  \item implicit conversions
-  \item implicit arguments
-  \end{itemize}
+  \subsection{Uses of the implicit modifier}
 
+\begin{minted}{scala}
+// implicit values
+implicit val n: Int = 42
+
+// implicit conversions
+implicit def f(n: Int): String = n.toString
+
+// implicit classes
+implicit class Wrapper[A](val a: A) {
+  def printMe: Unit = println(a)
+}
+
+// implicit parameters
+def foo[A](implicit o: Ordering[A]) = ???
+\end{minted}
   \section{Type Parameters}
   \TODO{}
 
@@ -524,8 +541,15 @@ def foo[A <: String]
 // Lower Bound, A has to be a supertype
 def foo[A :> String]
 
+// View Bound (deprecated!)
+def foo[A <% Ordered[A]](
+  x: A, y: A): Boolean = x < y
+
 // Context Bound
-def foo[A:]
+def foo[A:Ordering](x: A, y: A): Boolean = {
+  import Ordering.Implicits._ // infix syntax
+  x < y
+}
 \end{minted}
 
   \section{Pattern Matching}
