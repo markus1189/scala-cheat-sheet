@@ -455,13 +455,11 @@ for {
 
   \section{Futures}
 
-  \TODO{Imports okay? Needed for line length}
   \begin{mdframed}
     Don't blindly import Scala's default \texttt{ExecutionContext}, it
     is optimized for CPU-bound tasks.  Using it for blocking tasks
     will lead to starvation.
   \end{mdframed}
-
 
 \begin{minted}{scala}
 > import scala.concurrent._
