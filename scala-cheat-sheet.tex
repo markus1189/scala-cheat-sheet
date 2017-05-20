@@ -225,33 +225,7 @@ def many(cs: Char*): Seq[Char] = cs
 > many(Seq('1', '2') :_*)
 \end{minted}
 
-  \section{Operators}
-  \begin{itemize}
-  \item \textit{precedence} is determined by the \textit{first} character of the
-    operator's name:
-
-    \begin{tabular}{l | l}
-      lowest & letters \\
-             & \mintinline{scala}/|/ \\
-             & \mintinline{scala}|^| \\
-             & \mintinline{scala}|&| \\
-             & \mintinline{scala}|= !| \\
-             & \mintinline{scala}|< >| \\
-             & \mintinline{scala}|:| \\
-             & \mintinline{scala}|+ -| \\
-             & \mintinline{scala}|* / %| \\
-      highest & other special characters
-
-    \end{tabular}
-  \item \textit{associativity} is determined by the \textit{last}
-    character of the operator's name.  If the last character is a
-    \mintinline{scala}|:| it is right-associative, otherwise it is
-    left-associative
-  \end{itemize}
-
-  \section{Classes \& Traits}
-
-  \subsection{Classes}
+  \section{Classes}
 
 \begin{minted}{scala}
 // Implicit default constructor
@@ -273,12 +247,12 @@ class Foo(msg: String) {
 class Bar extends Foo("foo")
 \end{minted}
 
-  \subsection{Objects}
+  \section{Objects}
 
   \begin{mdframed}
     Objects can contain \textit{static} methods known from Java and
     play an important role in \texttt{implicit search} when used as a
-    companion object.
+    companion module.
   \end{mdframed}
 
 \begin{minted}{scala}
@@ -289,7 +263,7 @@ object Foo {
 
 // Special case:
 // class and object share name and source file
-// => the object becomes a companion object
+// => the object becomes a companion module
 class Bar
 object Bar { ... }
 \end{minted}
