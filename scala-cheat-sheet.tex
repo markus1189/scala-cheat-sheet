@@ -407,7 +407,7 @@ scala.MatchError: scala
 \end{minted}
 
 \begin{minted}{scala}
-// Define unapplySeq
+// Alternatively define unapplySeq
 object Words {
   def unapplySeq(s: String): Option[Seq[String]] =
     Some(s.split("\\s+").to[Seq])
