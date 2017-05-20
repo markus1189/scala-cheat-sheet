@@ -222,7 +222,7 @@ def twice[A](a: => A) = { a; a }
 def many(cs: Char*): Seq[Char] = cs
 
 // Calling a varargs method with a `Seq`
-scala> many(Seq('1', '2') :_*)
+> many(Seq('1', '2') :_*)
 \end{minted}
 
   \section{Operators}
@@ -397,7 +397,7 @@ import java.time.{Clock => JClock}
 // Import everything except
 import scala.util.{Try => _, _}
 
-// Multiple import clauses
+// Multiple import clauses in one line
 import scala.util.Try, scala.util.Success
 \end{minted}
 
