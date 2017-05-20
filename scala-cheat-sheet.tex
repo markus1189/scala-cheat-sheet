@@ -438,6 +438,33 @@ def foo[A:Ordering](x: A, y: A): Boolean = {
   x < y
 }
 \end{minted}
+
+    \section{Implicits}
+  There are two categories of places where Scala searches for implicits:
+  \begin{enumerate}
+  \item identifiers accessible without prefix at the call-site
+  \item implicit scope: all companion modules of classes associated
+    with the implicit's type
+  \end{enumerate}
+
+  \subsection{Uses of the implicit modifier}
+
+\begin{minted}{scala}
+// implicit values
+implicit val n: Int = 42
+
+// implicit conversions
+implicit def f(n: Int): String = n.toString
+
+// implicit classes
+implicit class Wrapper[A](val a: A) {
+  def printMe: Unit = println(a)
+}
+
+// implicit parameters
+def foo(implicit ec: ExecutionContext) = ???
+\end{minted}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -596,31 +623,6 @@ res: FiniteDuration = 2 hours
 res: FiniteDuration = 100 milliseconds
 \end{minted}
 
-  \section{Implicits}
-  There are two categories of places where Scala searches for implicits:
-  \begin{enumerate}
-  \item identifiers accessible without prefix at the call-site
-  \item implicit scope: all companion modules of classes associated
-    with the implicit's type
-  \end{enumerate}
-
-  \subsection{Uses of the implicit modifier}
-
-\begin{minted}{scala}
-// implicit values
-implicit val n: Int = 42
-
-// implicit conversions
-implicit def f(n: Int): String = n.toString
-
-// implicit classes
-implicit class Wrapper[A](val a: A) {
-  def printMe: Unit = println(a)
-}
-
-// implicit parameters
-def foo(implicit ec: ExecutionContext) = ???
-\end{minted}
   \section{Types}
 
   \begin{center}
