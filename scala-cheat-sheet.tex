@@ -425,10 +425,6 @@ def foo[A <: String]
 // Lower Bound, A has to be a supertype
 def foo[A :> String]
 
-// View Bound (deprecated!)
-def foo[A <% Ordered[A]](
-  x: A, y: A): Boolean = x < y
-
 // Context Bound
 def foo[A:Ordering](x: A, y: A): Boolean = {
   import Ordering.Implicits._ // infix syntax
