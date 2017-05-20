@@ -196,11 +196,11 @@
 
   \section{Variables}
 \begin{minted}{scala}
-var x         = "mutable"
-val y         = "immutable"
+var x = "mutable"
+val y = "immutable"
 
 // Initialized once on first access
-lazy val z    = "lazy"
+lazy val z = "lazy"
 
 // Pattern matching on left side
 val (one,two) = ("one", '2')
@@ -248,6 +248,213 @@ def many(cs: Char*): Seq[Char] = cs
     \mintinline{scala}|:| it is right-associative, otherwise it is
     left-associative
   \end{itemize}
+
+  \section{Classes \& Traits}
+  \TODO{}
+
+  - classes
+  - case classes
+  \section{Modifiers}
+  \TODO{}
+
+\begin{minted}{scala}
+private
+private[this]
+private[<package>]
+
+protected
+protected[this]
+
+override
+abstract override
+abstract
+final
+sealed
+lazy
+\end{minted}
+
+    \section{Imports}
+
+\begin{minted}{scala}
+// Regular import
+import scala.util.Try
+
+// Import multiple
+import scala.util.{Success, Failure}
+
+// Import wildcard
+import scala.util._
+
+// Import under different name
+import java.time.{Clock => JClock}
+
+// Import everything except
+import scala.util.{Try => _, _}
+
+// Multiple import clauses in one line
+import scala.util.Try, scala.util.Success
+\end{minted}
+
+  \section{Loops}
+
+\begin{minted}{scala}
+// while-loop
+while (<condition>) {
+  <expression>
+}
+
+// do-while-loop
+do {
+  <expression>
+} while (<condition>)
+
+// for-loop
+for (i <- 1 to 10) println(i)
+
+// nested for-loop
+for (i <- 1 to 10; j <- 1 to 10) println((i, j))
+
+// for-comprehension
+for (i <- 1 to 3; j <- 1 to i) yield i * y
+
+// guards in for-loops and for-comprehensions
+for (i <- 1 to 5 if i > 4) yield i
+
+// curly braces for multiline expressions
+for {
+  i <- 1 to 5
+  j <- 1 to i
+  if j % 2 == 1
+} yield i * j
+\end{minted}
+  \section{Pattern Matching}
+
+\begin{minted}{scala}
+arg match {
+  // Variable Patterns
+  case x =>
+
+  // Typed Patterns
+  case x: String =>
+
+  // Literal Patterns
+  case 42 =>
+
+  // Stable Identifier Patterns
+  case `foo` =>
+
+  // Constructor Patterns
+  case Foo(x,y) =>
+
+  // Tuple Patterns
+  case (x,y,z) =>
+
+  // Extractor Patterns
+  // (See 'Custom Extractors')
+  case NumString(x) =>
+
+  // Pattern Sequences
+  case x1 +: x2 +: xs =>
+
+  // Pattern Alternatives
+  case true | 42 | "str" =>
+
+  // Pattern Binders
+  case pair@(x,y) =>
+
+}
+\end{minted}
+
+  \section{Custom Extractors}
+
+  \subsection{unapply with Boolean}
+
+\begin{minted}{scala}
+object Even {
+  def unapply(n: Int): Boolean =
+    n % 2 == 0
+}
+\end{minted}
+
+\begin{minted}{text}
+> 41 match { case Even() => '!' }
+scala.MatchError: 41 ...
+> 42 match { case Even() => "even!" }
+res: String = "even!"
+\end{minted}
+
+  \subsection{unapply with Option}
+
+\begin{minted}{scala}
+object NumString {
+  def unapply(s: String): Option[Int] =
+    Try(s.toInt).toOption
+}
+\end{minted}
+
+\begin{minted}{text}
+> "42" match { case NumString(n) => n }
+res: Int = 42
+> "scala" match { case NumString(n) => n }
+scala.MatchError: scala
+\end{minted}
+
+  \subsection{unapplySeq}
+
+\begin{minted}{scala}
+object Words {
+  def unapplySeq(s: String): Option[Seq[String]] =
+    Some(s.split("\\s+").to[Seq])
+}
+\end{minted}
+
+\begin{minted}{text}
+> "foo bar baz" match { case Words(ws) => ws }
+res: Seq[String] = Vector("foo", "bar", "baz")
+> "test" match { case Words("foo" +: _) => 1 }
+scala.MatchError: test
+\end{minted}
+
+  \section{Type Parameters}
+  \TODO{}
+
+\begin{minted}{scala}
+// Two type parameters A and B
+def foo[A, B](x: Int) = ???
+
+// Upper Bound, A has to be a subtype
+def foo[A <: String]
+
+// Lower Bound, A has to be a supertype
+def foo[A :> String]
+
+// View Bound (deprecated!)
+def foo[A <% Ordered[A]](
+  x: A, y: A): Boolean = x < y
+
+// Context Bound
+def foo[A:Ordering](x: A, y: A): Boolean = {
+  import Ordering.Implicits._ // infix syntax
+  x < y
+}
+\end{minted}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \newpage{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \section{Ranges}
+
+\begin{minted}{scala}
+// Exclusive range: 1,2,3,4
+1 until 5
+
+// Inclusive range: 1,2,3,4,5
+1 to 5
+
+// Custom step size: 1,3,5
+1.to(5,2)
+
+\end{minted}
 
   \section{Option, Either, Try}
 
@@ -355,104 +562,6 @@ res: Try[Int] = Success(42)
   \item map, set, ...
   \end{itemize}
 
-  \section{Inheritance}
-  \TODO{}
-
-  - inheritance
-
-  \section{Classes}
-  \TODO{}
-
-  - classes
-  - case classes
-  \section{Ranges}
-
-\begin{minted}{scala}
-// Exclusive range: 1,2,3,4
-1 until 5
-
-// Inclusive range: 1,2,3,4,5
-1 to 5
-
-// Custom step size: 1,3,5
-1.to(5,2)
-
-\end{minted}
-
-  \section{Imports}
-
-\begin{minted}{scala}
-// Regular import
-import scala.util.Try
-
-// Import multiple
-import scala.util.{Success, Failure}
-
-// Import wildcard
-import scala.util._
-
-// Import under different name
-import java.time.{Clock => JClock}
-
-// Import everything except
-import scala.util.{Try => _, _}
-
-// Multiple import clauses in one line
-import scala.util.Try, scala.util.Success
-\end{minted}
-
-  \section{Modifiers}
-  \TODO{}
-
-\begin{minted}{scala}
-private
-private[this]
-private[<package>]
-
-protected
-protected[this]
-
-override
-abstract override
-abstract
-final
-sealed
-lazy
-\end{minted}
-
-  \section{Loops}
-
-\begin{minted}{scala}
-// while-loop
-while (<condition>) {
-  <expression>
-}
-
-// do-while-loop
-do {
-  <expression>
-} while (<condition>)
-
-// for-loop
-for (i <- 1 to 10) println(i)
-
-// nested for-loop
-for (i <- 1 to 10; j <- 1 to 10) println((i, j))
-
-// for-comprehension
-for (i <- 1 to 3; j <- 1 to i) yield i * y
-
-// guards in for-loops and for-comprehensions
-for (i <- 1 to 5 if i > 4) yield i
-
-// curly braces for multiline expressions
-for {
-  i <- 1 to 5
-  j <- 1 to i
-  if j % 2 == 1
-} yield i * j
-\end{minted}
-
   \section{Futures}
 
   \begin{mdframed}
@@ -524,120 +633,8 @@ implicit class Wrapper[A](val a: A) {
 }
 
 // implicit parameters
-def foo[A](implicit o: Ordering[A]) = ???
+def foo(implicit ec: ExecutionContext) = ???
 \end{minted}
-  \section{Type Parameters}
-  \TODO{}
-
-\begin{minted}{scala}
-// Two type parameters A and B
-def foo[A, B](x: Int) = ???
-
-// Upper Bound, A has to be a subtype
-def foo[A <: String]
-
-// Lower Bound, A has to be a supertype
-def foo[A :> String]
-
-// View Bound (deprecated!)
-def foo[A <% Ordered[A]](
-  x: A, y: A): Boolean = x < y
-
-// Context Bound
-def foo[A:Ordering](x: A, y: A): Boolean = {
-  import Ordering.Implicits._ // infix syntax
-  x < y
-}
-\end{minted}
-
-  \section{Pattern Matching}
-
-\begin{minted}{scala}
-arg match {
-  // Variable Patterns
-  case x =>
-
-  // Typed Patterns
-  case x: String =>
-
-  // Literal Patterns
-  case 42 =>
-
-  // Stable Identifier Patterns
-  case `foo` =>
-
-  // Constructor Patterns
-  case Foo(x,y) =>
-
-  // Tuple Patterns
-  case (x,y,z) =>
-
-  // Extractor Patterns
-  // (See 'Custom Extractors')
-  case NumString(x) =>
-
-  // Pattern Sequences
-  case x1 +: x2 +: xs =>
-
-  // Pattern Alternatives
-  case true | 42 | "str" =>
-
-  // Pattern Binders
-  case pair@(x,y) =>
-
-}
-\end{minted}
-
-  \section{Custom Extractors}
-
-  \subsection{unapply with Boolean}
-
-\begin{minted}{scala}
-object Even {
-  def unapply(n: Int): Boolean =
-    n % 2 == 0
-}
-\end{minted}
-
-\begin{minted}{text}
-> 41 match { case Even() => '!' }
-scala.MatchError: 41 ...
-> 42 match { case Even() => "even!" }
-res: String = "even!"
-\end{minted}
-
-  \subsection{unapply with Option}
-
-\begin{minted}{scala}
-object NumString {
-  def unapply(s: String): Option[Int] =
-    Try(s.toInt).toOption
-}
-\end{minted}
-
-\begin{minted}{text}
-> "42" match { case NumString(n) => n }
-res: Int = 42
-> "scala" match { case NumString(n) => n }
-scala.MatchError: scala
-\end{minted}
-
-  \subsection{unapplySeq}
-
-\begin{minted}{scala}
-object Words {
-  def unapplySeq(s: String): Option[Seq[String]] =
-    Some(s.split("\\s+").to[Seq])
-}
-\end{minted}
-
-\begin{minted}{text}
-> "foo bar baz" match { case Words(ws) => ws }
-res: Seq[String] = Vector("foo", "bar", "baz")
-> "test" match { case Words("foo" +: _) => 1 }
-scala.MatchError: test
-\end{minted}
-
   \section{Types}
 
   \begin{center}
