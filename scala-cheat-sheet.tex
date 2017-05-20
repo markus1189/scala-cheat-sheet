@@ -250,10 +250,50 @@ def many(cs: Char*): Seq[Char] = cs
   \end{itemize}
 
   \section{Classes \& Traits}
-  \TODO{}
 
-  - classes
-  - case classes
+  \subsection{Classes}
+
+\begin{minted}{scala}
+// Implicit default constructor
+// `AnyRef` plays the role of `Object`
+class Foo extends AnyRef {
+  val bar: Int = 42
+  def foobar: Boolean = true
+}
+
+// Parameterized constructor
+class Foo(msg: String) { ... }
+
+// Additional constructor
+class Foo(msg: String) {
+  def this(n: Int) = this(n.toString)
+}
+
+// Can inherit from exactly one class
+class Bar extends Foo("foo")
+\end{minted}
+
+  \subsection{Objects}
+
+  \begin{mdframed}
+    Objects can contain \textit{static} methods known from Java and
+    play an important role in \texttt{implicit search} when used as a
+    companion object.
+  \end{mdframed}
+
+\begin{minted}{scala}
+object Foo {
+  val hello: String = "Hello"
+  def world: String = "World"
+}
+
+// Special case:
+// class and object share name and source file
+// => the object becomes a companion object
+class Bar
+object Bar { ... }
+\end{minted}
+
     \section{Imports}
 
 \begin{minted}{scala}
