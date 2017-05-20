@@ -225,6 +225,33 @@ def many(cs: Char*): Seq[Char] = cs
 > many(Seq('1', '2') :_*)
 \end{minted}
 
+  \section{Strings}
+
+\begin{minted}{scala}
+val answer: Int = 42
+// add `s` prefix for interpolation
+"The answer is: $answer"
+
+// use ${} for more complex expressions
+"The answer is: ${21 * 2}"
+
+// """ enclose a multiline string
+"""
+Inside triple quotes there
+is no need to escape: \
+"""
+\end{minted}
+
+  \section{Regular Expressions}
+
+\begin{minted}{scala}
+// without groups
+val time = """\d{1,2}:\d{2}""".r
+
+> "16:03" match { case time() => "matched!" }
+res: String = matched!
+\end{minted}
+
   \section{Classes}
 
 \begin{minted}{scala}
@@ -266,6 +293,24 @@ object Foo {
 // => the object becomes a companion module
 class Bar
 object Bar { ... }
+\end{minted}
+
+  \section{Traits}
+
+\begin{minted}{scala}
+trait Foo {
+  // can have abstract members
+  def foo: String
+
+  // can have implementations
+  def bar: Unit = println("bar")
+}
+
+// Multiple traits can be mixed-in
+trait Bar
+class Foobar extends Foo with Bar {
+  override def foo = "foo"
+}
 \end{minted}
 
     \section{Imports}
