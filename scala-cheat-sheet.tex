@@ -313,28 +313,6 @@ class Foobar extends Foo with Bar {
 }
 \end{minted}
 
-    \section{Imports}
-
-\begin{minted}{scala}
-// Regular import
-import scala.util.Try
-
-// Import multiple
-import scala.util.{Success, Failure}
-
-// Import wildcard
-import scala.util._
-
-// Import under different name
-import java.time.{Clock => JClock}
-
-// Import everything except
-import scala.util.{Try => _, _}
-
-// Multiple import clauses in one line
-import scala.util.Try, scala.util.Success
-\end{minted}
-
   \section{For-loop and For-comprehension}
 
 \begin{minted}{scala}
