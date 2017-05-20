@@ -341,35 +341,25 @@ for {
 arg match {
   // Variable Patterns
   case x =>
-
   // Typed Patterns
   case x: String =>
-
   // Literal Patterns
   case 42 =>
-
   // Stable Identifier Patterns
   case `foo` =>
-
   // Constructor Patterns
   case Foo(x,y) =>
-
   // Tuple Patterns
   case (x,y,z) =>
-
   // Extractor Patterns
   // (See 'Custom Extractors')
   case NumString(x) =>
-
   // Pattern Sequences
   case x1 +: x2 +: xs =>
-
   // Pattern Alternatives
   case true | 42 | "str" =>
-
   // Pattern Binders
   case pair@(x,y) =>
-
 }
 \end{minted}
 
@@ -424,7 +414,6 @@ scala.MatchError: test
 \end{minted}
 
   \section{Type Parameters}
-  \TODO{}
 
 \begin{minted}{scala}
 // Two type parameters A and B
