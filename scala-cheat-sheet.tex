@@ -245,12 +245,24 @@ is no need to escape: \
   \section{Regular Expressions}
 
 \begin{minted}{scala}
-// without groups
-val time = """\d{1,2}:\d{2}""".r
+val time = """(\d{1,2}):(\d{2})""".r
 
-> "16:03" match { case time() => "matched!" }
+> "16:03" match { case time(_*) => "matched!" }
+\end{minted}
+\begin{minted}{text}
 res: String = matched!
 \end{minted}
+
+\begin{minted}{scala}
+
+> "16:12" match { case time(h,m) =>
+  s"Hours: $h, minutes: $m"
+}
+\end{minted}
+\begin{minted}{text}
+res: String = Hours: 16, minutes: 12
+\end{minted}
+
 
   \section{Classes}
 
