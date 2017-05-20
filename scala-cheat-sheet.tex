@@ -454,24 +454,35 @@ for {
 \end{minted}
 
   \section{Futures}
-  \TODO{}
 
-  \begin{itemize}
-  \item duration dsl
-  \item awaiting results (with note)
-  \item execution context (with warning)
-  \item sequencing futures
-  \end{itemize}
-
-  \subsection{Timeouts}
-  \TODO{}
-  \begin{itemize}
-  \item foo
+  \TODO{Imports okay? Needed for line length}
 \begin{minted}{scala}
-    import scala.concurrent.duration._
+> import scala.concurrent._
+> import ExecutionContext.Implicits.global
+> import duration._
+
+// Creating an asynchronous computation
+> Future { 5 * 2 }
+res1: Future[Int] = Future(<not completed>)
+
+// Modify result with a pure function
+> res1.map((n: Int) => n + 11)
+res2: Future[Int] = Future(<not completed>)
+
+// Use flatMap to chain Futures
+> res2.flatMap((n: Int) => Future { n * 2 })
+res3: Future[Int] = Future(<not completed>)
+
+// Waiting for the result
+// Avoid this, as much as possible
+> Await.result(res3, 1.second)
+res4: Int = 42
 \end{minted}
-  \item Await.result(future, 42.seconds)
-  \end{itemize}
+  \begin{mdframed}
+    Don't blindly import the suggested \texttt{ExecutionContext}.  It
+    is optimized for CPU-bound tasks and using it for blocking tasks
+    will lead to starvation.
+    \end{mdframed}
 
   \section{Implicits}
   \TODO{}
