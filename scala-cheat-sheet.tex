@@ -191,10 +191,10 @@
 \begin{document}
 \setminted{fontsize=\footnotesize}
 
-\small
+\footnotesize
 \begin{multicols*}{4}
 
-  \section{Variables}
+  \section{Variables \& Methods}
 \begin{minted}{scala}
 var x = "mutable"
 val y = "immutable"
@@ -204,12 +204,8 @@ lazy val z = "lazy"
 
 // Pattern matching on left side
 val (one,two) = ("one", '2')
-\end{minted}
 
-  \section{Methods}
-\begin{minted}{scala}
-def id(c: Char): Char = c
-
+// Simple method
 def add(n: Int, m: Int): Int = n + m
 
 // Curried version (one argument per list)
@@ -254,7 +250,7 @@ res: String = matched!
 \end{minted}
 
 \begin{minted}{scala}
-
+// extract matched groups
 > "16:12" match { case time(h,m) =>
   s"Hours: $h, minutes: $m"
 }
@@ -289,9 +285,9 @@ class Bar extends Foo("foo")
   \section{Objects}
 
   \begin{mdframed}
-    Objects can contain \textit{static} methods known from Java and
-    play an important role in \texttt{implicit search} when used as a
-    companion module.
+    \footnotesize Objects hold \textit{static} methods known from Java
+    and play an important role in \texttt{implicit search} when used
+    as a companion module.
   \end{mdframed}
 
 \begin{minted}{scala}
@@ -507,6 +503,7 @@ def foo(implicit ec: ExecutionContext) = ???
 
   \subsection{Option}
   \begin{mdframed}
+    \footnotesize
     Replaces \texttt{null}, there is only \textit{one} obvious
     reason for a missing value.
   \end{mdframed}
@@ -544,6 +541,7 @@ res: Option[Int] = Some(42)
 \end{minted}
   \subsection{Either}
   \begin{mdframed}
+    \footnotesize
     \textit{Domain} errors that have to be handled, there are
     \textit{multiple} reasons for an error.
   \end{mdframed}
@@ -576,6 +574,7 @@ res: Either[Int, Int] = Left(4)
 \end{minted}
   \subsection{Try}
   \begin{mdframed}
+    \footnotesize
     Interact with Java / Legacy Code where exceptions are thrown, a
     means of last resort.
   \end{mdframed}
@@ -612,9 +611,9 @@ res: Try[Int] = Success(42)
   \section{Futures}
 
   \begin{mdframed}
+    \footnotesize
     Don't blindly import Scala's default \texttt{ExecutionContext}, it
-    is optimized for CPU-bound tasks.  Using it for blocking tasks
-    will lead to starvation.
+    is optimized for \textit{CPU-bound} tasks!
   \end{mdframed}
 
 \begin{minted}{scala}
