@@ -607,7 +607,7 @@ res: Either[Int, Int] = Left(4)
   \end{mdframed}
   \begin{center}
     \begin{tikzpicture}[
-      level 1/.style={sibling distance=10em}]
+      level 1/.style={sibling distance=11em}]
       \node[sup]{Try[A]}
       child{node[sub] {Failure[A](e: Throwable)}}
       child{node[sub]{Success[A](value: A)}}
@@ -626,14 +626,50 @@ res: Try[Int] = Success(42)
 \end{minted}
 
   \section{Collections}
-  \TODO{}
 
-  \begin{itemize}
-  \item hierarchy?
-  \item mutable / immutable
-  \item list vs vector
-  \item map, set, ...
-  \end{itemize}
+  \begin{mdframed}
+    \footnotesize
+
+    \par Prefer immutable collections, falling back to a
+    \mintinline{scala}|var| first and use mutable collections as a
+    last resort only \\
+
+    \par Prefer \mintinline{scala}|Vector| over
+    \mintinline{scala}|List| \\
+
+    \par \textcolor{myred!120}{Warning:}
+    \mintinline{scala}|Seq| by default allows mutable
+    implementations, import
+    \mintinline{scala}|scala.collection.immutable.Seq| instead
+  \end{mdframed}
+
+\begin{minted}{scala}
+// Creating a collection via apply:
+> List(1, 2, 3)
+res: List[Int] = List(1, 2, 3)
+> Array('a', 'b')
+res: Array[Char] = Array(a, b)
+> Map(('a', 1), ('b', 2))
+res: Map[Char, Int] = Map(a -> 1, b -> 2)
+
+// You have been warned
+> import scala.collection.mutable
+> mutable.Buffer(1, 2, 3)
+res: Buffer[Int] = ArrayBuffer(1, 2, 3)
+\end{minted}
+
+  \subsection{Important methods}
+
+  \begin{tabular}{l p{5cm}}
+    \mintinline{scala}|map| & transform each element \\
+    \mintinline{scala}|filter| & filter elements with predicate \\
+    \mintinline{scala}|collect| & filter then map in one \\
+    \mintinline{scala}|foldLeft| & recursive traversal \\
+    \mintinline{scala}|foldRight| & like -Left, but for right associative ops \\
+    \mintinline{scala}|take, drop| & remove elements from front/back \\
+    \mintinline{scala}|exists| & check predicate satisfied >= 1 \\
+    \mintinline{scala}|to[Col]| & convert to collection \mintinline{scala}|Col|
+  \end{tabular}
 
   \section{Futures}
 
