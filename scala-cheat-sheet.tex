@@ -344,6 +344,11 @@ case class Person(name: String, age: Int)
 
   \section{For-loop and For-comprehension}
 
+  \begin{mdframed}
+    \footnotesize For-loops: iterate for side-effects only.
+    For-comprehensions: chain effectful computations.
+  \end{mdframed}
+
 \begin{minted}{scala}
 // for-loop
 for (i <- 1 to 10) println(i)
