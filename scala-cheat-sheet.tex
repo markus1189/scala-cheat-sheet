@@ -327,6 +327,21 @@ class Foobar extends Foo with Bar {
 }
 \end{minted}
 
+  \section{Case Classes}
+
+\begin{minted}{scala}
+// class definition prefixed with `case`
+case class Person(name: String, age: Int)
+\end{minted}
+
+  What \mintinline{scala}|case| does:
+  \begin{enumerate}
+  \item constructor parameters are promoted to fields
+  \item generates companion module with \mintinline{scala}|apply| and \mintinline{scala}|unapply|
+  \item generates the \mintinline{scala}|copy| method
+  \item generates \mintinline{scala}|equals|, \mintinline{scala}|hashCode| and \mintinline{scala}|toString|
+  \end{enumerate}
+
   \section{For-loop and For-comprehension}
 
 \begin{minted}{scala}
