@@ -471,27 +471,27 @@ def foo[A:Ordering](x: A, y: A): Boolean = {
 
   \begin{center}
     \begin{tikzpicture}[auto,grow=right]
-      \node[sup](animal){A};
-      \node[sup, xshift=03mm, right of=animal         ](cage-animal-inv){F[A]};
-      \node[sup, xshift=10mm, right of=cage-animal-inv](cage-animal-cov){F[+A]};
-      \node[sup, xshift=10mm, right of=cage-animal-cov](cage-animal-con){F[-A]};
+      \node[sup](a){A};
+      \node[sup, xshift=03mm, right of=a         ](f-a-inv){F[A]};
+      \node[sup, xshift=10mm, right of=f-a-inv](f-a-cov){F[+A]};
+      \node[sub, xshift=10mm, right of=f-a-cov](f-a-con){F[-A]};
 
-      \node[below of=animal](l1){};
+      \node[below of=a](l1){};
       \node[xshift=03mm, right of=l1](l2){invariant};
       \node[xshift=10mm, right of=l2](l3){covariant};
       \node[xshift=10mm, right of=l3](l4){contravariant};
 
-      \node[sup, below of=l1](bird){B};
-      \node[sup, xshift=03mm, right of=bird         ](cage-bird-inv){F[B]};
-      \node[sup, xshift=10mm, right of=cage-bird-inv](cage-bird-cov){F[+B]};
-      \node[sup, xshift=10mm, right of=cage-bird-cov](cage-bird-con){F[-B]};
+      \node[sub, below of=l1](b){B};
+      \node[sup, xshift=03mm, right of=b         ](f-b-inv){F[B]};
+      \node[sub, xshift=10mm, right of=f-b-inv](f-b-cov){F[+B]};
+      \node[sup, xshift=10mm, right of=f-b-cov](f-b-con){F[-B]};
 
-      \path [line] (bird) -- (animal);
+      \path [line] (b) -- (a);
       % no relation for invariance
-      \path [line, -] (cage-bird-cov) -- (l3) ;
-      \path [line] (l3) -- (cage-animal-cov) ;
-      \path [line, -] (cage-animal-con) -- (l4) ;
-      \path [line] (l4) -- (cage-bird-con) ;
+      \path [line, -] (f-b-cov) -- (l3) ;
+      \path [line] (l3) -- (f-a-cov) ;
+      \path [line, -] (f-a-con) -- (l4) ;
+      \path [line] (l4) -- (f-b-con) ;
     \end{tikzpicture}
   \end{center}
 
