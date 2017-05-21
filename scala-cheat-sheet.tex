@@ -304,6 +304,13 @@ object Bar { ... }
 
   \section{Traits}
 
+  \begin{mdframed}
+    \footnotesize
+    The \mintinline{scala}|sealed| modifier forbids extension of the
+    trait from a different source file than the one it is defined in.
+    This allows exhaustiveness checks while pattern matching.
+  \end{mdframed}
+
 \begin{minted}{scala}
 trait Foo {
   // can have abstract members
