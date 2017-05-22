@@ -14,6 +14,7 @@
 \usepackage{titlesec}
 \usepackage{keystroke}
 \usepackage{todonotes}
+\usepackage{wrapfig}
 \newcommand{\TODO}[2][]{\todo[inline,color=green!40,linecolor=green!50,#1]{\small TODO #2}}
 
 \renewcommand\familydefault{\sfdefault}
@@ -103,11 +104,7 @@
     %%%%% START CHANGE
     \ifnum\count@=\numexpr\mult@rightbox+2\relax
     \setbox\count@\vsplit\@cclv to \dimexpr \dimen@-1cm\relax
-    
-    % Comment in for header box
     % \setbox\count@\vbox to \dimen@{\vbox to 1.5cm{\header}\unvbox\count@\vss}%
-    % Comment in for header box
-
     \else
     \setbox\count@\vsplit\@cclv to \dimen@
     \fi
@@ -469,6 +466,9 @@ def foo[A:Ordering](x: A, y: A): Boolean = {
   import Ordering.Implicits._ // infix syntax
   x < y
 }
+// Context Bound desugar to implicit arguments
+def foo[A](x: A, y: A)(
+  implicit evidence$1: Ordering[A]): Boolean
 \end{minted}
 
   \section{Variance}
@@ -500,18 +500,18 @@ def foo[A:Ordering](x: A, y: A): Boolean = {
   \end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \newpage{}
+  % \newpage{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   \section{Implicits}
   There are two categories of places where Scala searches for implicits:
   \begin{enumerate}
-  \item identifiers accessible without prefix at the call-site
+  \item identifiers accessible \textit{without prefix} at the call-site
   \item implicit scope: all companion modules of classes associated
     with the implicit's type
   \end{enumerate}
 
-  \subsection{Uses of the implicit modifier}
+  \subsection{The implicit modifier}
 
 \begin{minted}{scala}
 // implicit values
@@ -562,9 +562,7 @@ def foo(implicit ec: ExecutionContext) = ???
     \end{tikzpicture}
   \end{center}
 
-  \section{Option, Either, Try}
-
-  \subsection{Option}
+  \section{Option}
   \begin{mdframed}
     \footnotesize
     Replaces \texttt{null}, there is only \textit{one} obvious
@@ -602,7 +600,7 @@ res: Option[Int] = Some(1)
 res: Option[Int] = Some(42)
 
 \end{minted}
-  \subsection{Either}
+  \section{Either}
   \begin{mdframed}
     \footnotesize
     \textit{Domain} errors that have to be handled, there are
@@ -635,7 +633,7 @@ res: Either[Int, Int] = Right(1)
 > left.left.map(_.length)
 res: Either[Int, Int] = Left(4)
 \end{minted}
-  \subsection{Try}
+  \section{Try}
   \begin{mdframed}
     \footnotesize
     Interact with Java / Legacy Code where exceptions are thrown, a
@@ -668,10 +666,8 @@ res: Try[Int] = Success(42)
 
     \par Prefer immutable collections, falling back to a
     \mintinline{scala}|var| first and use mutable collections as a
-    last resort only \\
-
-    \par Prefer \mintinline{scala}|Vector| over
-    \mintinline{scala}|List| \\
+    last resort only.  Also, prefer \mintinline{scala}|Vector| over
+    \mintinline{scala}|List|\\
 
     \par \textcolor{myred!120}{Warning:}
     \mintinline{scala}|Seq| by default allows mutable
@@ -688,7 +684,7 @@ res: Array[Char] = Array(a, b)
 > Map(('a', 1), ('b', 2))
 res: Map[Char, Int] = Map(a -> 1, b -> 2)
 
-// You have been warned
+// Importing mutable collections
 > import scala.collection.mutable
 > mutable.Buffer(1, 2, 3)
 res: Buffer[Int] = ArrayBuffer(1, 2, 3)
@@ -697,15 +693,23 @@ res: Buffer[Int] = ArrayBuffer(1, 2, 3)
   \subsection{Important methods}
 
   \begin{tabular}{l p{5cm}}
-    \mintinline{scala}|map| & transform each element \\
-    \mintinline{scala}|filter| & filter elements with predicate \\
     \mintinline{scala}|collect| & filter then map in one \\
-    \mintinline{scala}|foldLeft| & recursive traversal \\
-    \mintinline{scala}|foldRight| & like -Left, but for right associative ops \\
-    \mintinline{scala}|take, drop| & remove elements from front/back \\
+    \mintinline{scala}|collectFirst| & \mintinline{scala}|find| with pattern matching  \\
+    \mintinline{scala}|count| & count elements with predicate  \\
     \mintinline{scala}|exists| & check predicate satisfied >= 1 \\
+    \mintinline{scala}|find| & find element with predicate \\
+    \mintinline{scala}|filter| & filter elements with predicate \\
+    \mintinline{scala}|flatMap| & map a function producing a collection \\
+    \mintinline{scala}|foldLeft| & recursive traversal \\
+    \mintinline{scala}|foldRight| & for right associative ops \\
+    \mintinline{scala}|forall| & check predicate holds for all elements \\
+    \mintinline{scala}|map| & transform each element \\
+    \mintinline{scala}|slice| & select an interval of elements \\
+    \mintinline{scala}|take, drop| & remove elements from front/back \\
     \mintinline{scala}|to[Col]| & convert to collection \mintinline{scala}|Col|
   \end{tabular}
+
+  \vspace*{02mm}
 
   \section{Futures}
 
@@ -716,9 +720,8 @@ res: Buffer[Int] = ArrayBuffer(1, 2, 3)
   \end{mdframed}
 
 \begin{minted}{scala}
-> import scala.concurrent._
+> import scala.concurrent._, duration._
 > import ExecutionContext.Implicits.global
-> import duration._
 
 // Creating an asynchronous computation
 > Future { 5 * 2 }
@@ -738,8 +741,7 @@ res3: Future[Int] = Future(<not completed>)
   case Failure(e) => println(s"Failure: $e")
 }
 
-// Waiting for the result
-// Avoid this, as much as possible
+// Block thread for result (anti-pattern)
 > Await.result(res3, 1.second)
 res4: Int = 42
 \end{minted}
@@ -751,36 +753,25 @@ res4: Int = 42
 res: FiniteDuration = 5 seconds
 > 2.hours
 res: FiniteDuration = 2 hours
-> 100.millis
-res: FiniteDuration = 100 milliseconds
 \end{minted}
 
-  \section{IntelliJ Scala}
+  \section{Scala Plugin for IntelliJ IDEA}
+  {
+    \setlength\tabcolsep{1mm}
 
-  \begin{tabular}{l l l}
-    Reformat & \Ctrl{}\Alt{} & \keystroke{L} \\[1mm]
-    Expand selection & \Ctrl{} & \keystroke{W} \\[1mm]
-    Surround with & \Ctrl{}\Alt{} & \keystroke{T}
-  \end{tabular}
-
-  % \subsection{Implicits}
-
-  % \begin{tabular}{l l l}
-  %   Implicit parameters & \Ctrl{}\Shift & \keystroke{P} \\[1mm]
-  %   Implicit conversions & \Ctrl{}\Shift & \keystroke{Q}
-  % \end{tabular}
-
-  \subsection{Refactor}
-  \begin{tabular}{l l l}
-    Inline & \Ctrl{}\Alt{} & \keystroke{N} \\[1mm]
-    Extract Variable & \Ctrl{}\Alt{} & \keystroke{V} \\[1mm]
-    Extract Field & \Ctrl{}\Alt{} & \keystroke{F} \\[1mm]
-    Extract Parameter & \Ctrl{}\Alt{} & \keystroke{P} \\[1mm]
-    Extract Method & \Ctrl{}\Alt{} & \keystroke{M} \\[1mm]
-    Copy & \Shift{} & \keystroke{F5} \\[1mm]
-    Rename & \Shift{} & \keystroke{F6} \\
-  \end{tabular}
-
+    \begin{tabular}{l l l l c}
+      Show Type Info & \Alt{} & & & \keystroke{=} \\[1mm]
+      Implicit parameters & \Ctrl{} & & \Shift{} & \keystroke{P} \\[1mm]
+      Implicit conversions & \Ctrl{} & & \Shift{} & \keystroke{Q} \\[1mm]
+      ScalaDoc stub & \Ctrl{}& \Alt{} & & \keystroke{Q} \\[1mm]
+      Refactor This & \Ctrl{}& \Alt{} & \Shift{} & \keystroke{T} \\[1mm]
+      Rename & & & \Shift{} & \keystroke{F6} \\[1mm]
+      Inline & \Ctrl{}& \Alt{} & & \keystroke{N} \\[1mm]
+      Extract Variable & \Ctrl{}& \Alt{} & & \keystroke{V} \\[1mm]
+      Extract Field & \Ctrl{}& \Alt{} & & \keystroke{F} \\[1mm]
+      Extract Method & \Ctrl{}& \Alt{} & & \keystroke{M}
+    \end{tabular}
+  }
   % \subsection{Running \& Debugging}
   % \begin{tabular}{l l l}
   %   Stop & \Ctrl{} & \keystroke{F2} \\[1mm]
@@ -790,6 +781,16 @@ res: FiniteDuration = 100 milliseconds
   %   View breakpoints & \Ctrl{}\Shift & \keystroke{F8} \\[1mm]
   %   Temp. breakpoint & \Ctrl{}\Shift{}\Alt{} & \keystroke{F8}
   % \end{tabular}
-  \vspace{1cm}
+  \vfill{}
+  \begin{mdframed}
+    \begin{tabular}{l p{4.25cm}}
+      \raisebox{-1.25cm}{\includegraphics[height=1.5cm]{profile.png}}
+      &
+        \color{black}
+        \textit{Markus Hauck}: IT consultant and Scala trainer for codecentric in
+        Germany.  Scala developer by day, functional programmer using
+        scary languages by night. @markus1189
+    \end{tabular}
+  \end{mdframed}
 \end{multicols*}
 \end{document}
