@@ -208,7 +208,7 @@ val y = "immutable"
 lazy val z = "lazy"
 
 // Pattern matching on left side
-val (one,two) = ("one", '2')
+val (one, two) = ("one", '2')
 
 // Simple method
 def add(n: Int, m: Int): Int = n + m
@@ -291,7 +291,7 @@ class Bar extends Foo("foo")
 
   \begin{mdframed}
     \footnotesize Objects hold ``\textit{static}'' methods.  When used
-    as a companion module, relevant during implicit search .  Objects
+    as a companion module, it is relevant during implicit search.  Objects
     are \textit{singletons}.
   \end{mdframed}
 
