@@ -208,7 +208,7 @@ val y = "immutable"
 lazy val z = "lazy"
 
 // Pattern matching on left side
-val (one, two) = ("one", '2')
+val (one, two) = ("one", 2)
 
 // Simple method
 def add(n: Int, m: Int): Int = n + m
@@ -220,10 +220,10 @@ def add(n: Int)(m: Int): Int = n + m
 def twice[A](a: => A) = { a; a }
 
 // Repeated Parameters (Varargs)
-def many(cs: Char*): Seq[Char] = cs
+def many(ns: Int*): Seq[Int] = ns
 
 // Calling a varargs method with a `Seq`
-> many(Seq('1', '2') :_*)
+> many(Seq(1, 2) :_*)
 \end{minted}
 
   \section{Strings}
@@ -290,8 +290,8 @@ class Bar extends Foo("foo")
   \section{Objects}
 
   \begin{mdframed}
-    \footnotesize Objects hold ``\textit{static}'' methods.  When used
-    as a companion module, it is relevant during implicit search.  Objects
+    \footnotesize Objects hold ``\textit{static}'' members.  When used
+    as a companion object, it is relevant during implicit search.  Objects
     are \textit{singletons}.
   \end{mdframed}
 
@@ -301,7 +301,7 @@ object Foo {
   def world: String = "World"
 }
 
-// Companion module:
+// Companion object:
 // class and object share name and source file
 class Bar
 object Bar { ... }
@@ -342,7 +342,7 @@ case class Person(name: String, age: Int)
   What \mintinline{scala}|case| does:
   \begin{enumerate}
   \item constructor parameters are promoted to fields
-  \item generates companion module with \mintinline{scala}|apply| and \mintinline{scala}|unapply|
+  \item generates companion object with \mintinline{scala}|apply| and \mintinline{scala}|unapply|
   \item generates the \mintinline{scala}|copy| method
   \item generates \mintinline{scala}|equals|, \mintinline{scala}|hashCode| and \mintinline{scala}|toString|
   \end{enumerate}
@@ -453,7 +453,7 @@ scala.MatchError: test
 
 \begin{minted}{scala}
 // Two type parameters A and B
-def foo[A, B](x: Int) = ???
+def foo[A, B](a: A, b: B) = ???
 
 // Upper Bound, A has to be a subtype
 def foo[A <: String]
@@ -462,11 +462,11 @@ def foo[A <: String]
 def foo[A :> String]
 
 // Context Bound
-def foo[A:Ordering](x: A, y: A): Boolean = {
-  import Ordering.Implicits._ // infix syntax
+def foo[A: Ordering](x: A, y: A): Boolean = {
+  import Ordering.Implicits._
   x < y
 }
-// Context Bound desugar to implicit arguments
+// Context Bounds desugar to implicit params
 def foo[A](x: A, y: A)(
   implicit evidence$1: Ordering[A]): Boolean
 \end{minted}
@@ -507,7 +507,7 @@ def foo[A](x: A, y: A)(
   There are two categories of places where Scala searches for implicits:
   \begin{enumerate}
   \item identifiers accessible \textit{without prefix} at the call-site
-  \item implicit scope: all companion modules of classes associated
+  \item implicit scope: all companion objects of classes associated
     with the implicit's type
   \end{enumerate}
 
@@ -572,7 +572,7 @@ def foo(implicit ec: ExecutionContext) = ???
     \begin{tikzpicture}[
       level 1/.style={sibling distance=10em}]
       \node[sup]{Option[A]}
-      child{node[sub] {None[Nothing]}}
+      child{node[sub] {None}}
       child{node[sub]{Some[A](value: A)}}
       ;
     \end{tikzpicture}
@@ -667,12 +667,12 @@ res: Try[Int] = Success(42)
     \par Prefer immutable collections, falling back to a
     \mintinline{scala}|var| first and use mutable collections as a
     last resort only.  Also, prefer \mintinline{scala}|Vector| over
-    \mintinline{scala}|List|\\
+    \mintinline{scala}|List|\\.
 
     \par \textcolor{myred!120}{Warning:}
     \mintinline{scala}|Seq| by default allows mutable
     implementations, import
-    \mintinline{scala}|scala.collection.immutable.Seq| instead
+    \mintinline{scala}|scala.collection.immutable.Seq| instead.
   \end{mdframed}
 
 \begin{minted}{scala}
