@@ -231,10 +231,10 @@ def many(ns: Int*): Seq[Int] = ns
 \begin{minted}{scala}
 val answer: Int = 42
 // add `s` prefix for interpolation
-"The answer is: $answer"
+s"The answer is: $answer"
 
 // use ${} for more complex expressions
-"The answer is: ${21 * 2}"
+s"The answer is: ${21 * 2}"
 
 // """ enclose a multiline string
 """
