@@ -104,7 +104,7 @@
     %%%%% START CHANGE
     \ifnum\count@=\numexpr\mult@rightbox+2\relax
     \setbox\count@\vsplit\@cclv to \dimexpr \dimen@-1cm\relax
-    % \setbox\count@\vbox to \dimen@{\vbox to 1.5cm{\header}\unvbox\count@\vss}%
+    \setbox\count@\vbox to \dimen@{\vbox to 1.5cm{\header}\unvbox\count@\vss}%
     \else
     \setbox\count@\vsplit\@cclv to \dimen@
     \fi
@@ -772,25 +772,6 @@ res: FiniteDuration = 2 hours
       Extract Method & \Ctrl{}& \Alt{} & & \keystroke{M}
     \end{tabular}
   }
-  % \subsection{Running \& Debugging}
-  % \begin{tabular}{l l l}
-  %   Stop & \Ctrl{} & \keystroke{F2} \\[1mm]
-  %   Debug & \Ctrl{} & \keystroke{F9} \\[1mm]
-  %   Debug last & \Shift & \keystroke{F9} \\[1mm]
-  %   Toggle breakpoint & \Ctrl{} & \keystroke{F8} \\[1mm]
-  %   View breakpoints & \Ctrl{}\Shift & \keystroke{F8} \\[1mm]
-  %   Temp. breakpoint & \Ctrl{}\Shift{}\Alt{} & \keystroke{F8}
-  % \end{tabular}
-  \vfill{}
-  \begin{mdframed}
-    \begin{tabular}{l p{4.25cm}}
-      \raisebox{-1.25cm}{\includegraphics[height=1.5cm]{profile.png}}
-      &
-        \color{black}
-        \textit{Markus Hauck}: IT consultant and Scala trainer for codecentric in
-        Germany.  Scala developer by day, functional programmer using
-        scary languages by night. @markus1189
-    \end{tabular}
-  \end{mdframed}
+  \vspace*{1cm}
 \end{multicols*}
 \end{document}
